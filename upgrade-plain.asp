@@ -1,18 +1,14 @@
-<html><head><title>Firmware Upgrade</title></head>
+<html><head><title>固件升级</title></head>
 <body>
-<h1>Firmware Upgrade</h1>
-<b>WARNING:</b>
+<h1>固件升级</h1>
+<b>警告:</b>
 <ul>
-<li>There is no upload status information in this page and there will be no
-change in the display after the Upgrade button is pushed. You will be shown a
-new page only after the upgrade completes.
-<li>It may take up to 3 minutes for the upgrade to complete. Do not interrupt
-the router or the browser during this time.
+<li>当您按下升级按纽后，本页面并不显示更新进度，必须在更新固件完成后才会显示新的页面.
+<li>固件升级完成大约需要3分钟. 在这期间请不要断开路由器或者浏览页面.
 </ul>
-
 <br>
 <form name="firmware_upgrade" method="post" action="upgrade.cgi?<% nv(http_id) %>" encType="multipart/form-data">
-<input type="hidden" name="submit_button" value="Upgrade">
-Firmware: <input type="file" name="file"> <input type="submit" value="Upgrade">
+<input type="hidden" name="submit_button" value="升级">
+固件: <input type="file" name="file"> <input type="submit" value="升级">
 </form>
 </body></html>
