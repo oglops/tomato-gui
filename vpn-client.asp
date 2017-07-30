@@ -410,10 +410,10 @@ W('</div>');
 W('<div id=\''+t+'-advanced\'>');
 createFieldTable('', [
 { title: '轮询间隔', name: 'vpn_'+t+'_poll', type: 'text', maxlen: 4, size: 5, value: eval( 'nvram.vpn_'+t+'_poll' ), suffix: '&nbsp;<small>(单位分, 0为禁用)</small>' }, 
-{ title: '重定向Internet流量', multi: [
+{ title: '重定向 Internet 流量', multi: [
 { name: 'f_vpn_'+t+'_rgw', type: 'checkbox', value: eval( 'nvram.vpn_'+t+'_rgw' ) != 0 },
 { name: 'vpn_'+t+'_gw', type: 'text', maxlen: 15, size: 17, value: eval( 'nvram.vpn_'+t+'_gw' ), prefix: '<span id=\''+t+'_gateway\'> Gateway:&nbsp', suffix: '</span>'} ] },
-{ title: '忽略重定向网关(route-nopull)', name: 'f_vpn_'+t+'_nopull', type: 'checkbox', value: eval( 'nvram.vpn_'+t+'_nopull' ) != 0 },
+{ title: '忽略重定向网关<br>(route-nopull)', name: 'f_vpn_'+t+'_nopull', type: 'checkbox', value: eval( 'nvram.vpn_'+t+'_nopull' ) != 0 },
 { title: '接受DNS配置', name: 'vpn_'+t+'_adns', type: 'select', options: [[0, '关闭'],[1, '宽松'],[2, '严格'],[3, '独占']], value: eval( 'nvram.vpn_'+t+'_adns' ) },
 { title: '加密算法', name: 'vpn_'+t+'_cipher', type: 'select', options: ciphers, value: eval( 'nvram.vpn_'+t+'_cipher' ) },
 { title: '压缩', name: 'vpn_'+t+'_comp', type: 'select', options: [ ['-1', '关闭'], ['no', '无'], ['yes', '启用'], ['adaptive', '自适应'] ], value: eval( 'nvram.vpn_'+t+'_comp' ) },
@@ -421,7 +421,7 @@ createFieldTable('', [
 suffix: '&nbsp;<small>(单位秒, -1代表默认值)</small>' },
 { title: '连接重试', name: 'vpn_'+t+'_retry', type: 'text', maxlen: 5, size: 7, value: eval( 'nvram.vpn_'+t+'_retry' ),
 suffix: '&nbsp;<small>(单位秒; -1代表无限)</small>' },
-{ title: '验证服务器证书(tls-remote)', multi: [
+{ title: '验证服务器证书<br>(tls-remote)', multi: [
 { name: 'f_vpn_'+t+'_tlsremote', type: 'checkbox', value: eval( 'nvram.vpn_'+t+'_tlsremote' ) != 0 },
 { name: 'vpn_'+t+'_cn', type: 'text', maxlen: 64, size: 54,
 value: eval( 'nvram.vpn_'+t+'_cn' ), prefix: '<span id=\''+t+'_cn\'> Common Name:&nbsp', suffix: '</span>'} ] },
@@ -442,7 +442,7 @@ W('</ul>');
 W('</div>');
 W('</div>');
 W('<div id=\''+t+'-keys\'>');
-W('<p class=\'keyhelp\'>For help generating keys, refer to the OpenVPN <a id=\''+t+'-keyhelp\'>HOWTO</a>.</p>');
+W('<p class=\'keyhelp\'>关于密钥生成的帮助, 请查看 OpenVPN 的<a id=\''+t+'-keyhelp\'>HOWTO</a> 教程.</p>');
 createFieldTable('', [
 { title: '静态密钥', name: 'vpn_'+t+'_static', type: 'textarea', value: eval( 'nvram.vpn_'+t+'_static' ) },
 { title: '证书颁发机构', name: 'vpn_'+t+'_ca', type: 'textarea', value: eval( 'nvram.vpn_'+t+'_ca' ) },
@@ -459,7 +459,7 @@ W('<div id=\''+t+'-status-errors\' class=\'error\'></div>');
 W('</div>');
 W('<div style=\'text-align:right\'><a href=\'javascript:updateStatus('+i+')\'>刷新状态</a></div>');
 W('</div>');
-W('<input type="button" value="' + (eval('vpn'+(i+1)+'up') ? '停止' : '启动') + ' Now" onclick="toggle(\'vpn'+t+'\', vpn'+(i+1)+'up)" id="_vpn'+t+'_button">');
+W('<input type="button" value="' + (eval('vpn'+(i+1)+'up') ? '停止' : '启动') + ' " onclick="toggle(\'vpn'+t+'\', vpn'+(i+1)+'up)" id="_vpn'+t+'_button">');
 W('</div>');
 }
 </script>

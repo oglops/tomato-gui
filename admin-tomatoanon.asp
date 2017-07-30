@@ -71,12 +71,12 @@ TomatoAnon 脚本是完全开放的，并且用 bash 编写。 每个人都可�
 当然您也可以随时重新启用它.<br>
 <br>
 以下数据由 TomatoAnon 收集和传输:<br>
- - MD5SUM of WAN+LAN MAC addresses - this will identify a router. Ex: 1c1dbd4202d794251ec1acf1211bb2c8<br>
- - Model of router. Ex: Asus RT-N66U<br>
- - Installed version of Tomato. Ex: 102 K26 USB<br>
- - Builtype. Ex: Mega-VPN-64K<br>
- - Uptime of your router. Ex: 3 days<br>
-That`s it !!<br>
+ - WAN+LAN MAC 地址的 MD5SUM - 用来区分路由器. 如: 1c1dbd4202d794251ec1acf1211bb2c8<br>
+ - 路由器型号. 如: Asus RT-N66U<br>
+ - 当前安装的 Tomato 版本. 如: 102 K26 USB<br>
+ - 编译类型. 如: Mega-VPN-64K<br>
+ - 路由器开机时间. 如: 3 天<br>
+这就是全部的数据了 !!<br>
 <br>
 感谢您的阅读，请做出正确的选择来帮助这个项目.<br>
 <br>
@@ -88,8 +88,8 @@ That`s it !!<br>
 <div class='section'>
 <script type='text/javascript'>
 createFieldTable('', [
-	{ title: '你了解 TomatoAnon 功能了吗', name: 'tomatoanon_answer', type: 'select', options: [ ['0','不, 我不清楚. 我需要阅读上述信息并作出明智的决定.'], ['1','是的, 我已了解并作出决定.'] ], value: nvram.tomatoanon_answer, suffix: ' '},
-	{ title: '是否要启用 TomatoAnon ?', name: 'tomatoanon_enable', type: 'select', options: [ ['-1','我现在不确定'], ['1','是的, 我确定启用它'], ['0','不, 我不想启用它'] ], value: nvram.tomatoanon_enable, suffix: ' '}
+	{ title: '你了解 TomatoAnon<br>功能了吗', name: 'tomatoanon_answer', type: 'select', options: [ ['0','不, 我不清楚. 我需要阅读上述信息并作出明智的决定.'], ['1','是的, 我已了解并作出决定.'] ], value: nvram.tomatoanon_answer, suffix: ' '},
+	{ title: '是否要启用<br>TomatoAnon ?', name: 'tomatoanon_enable', type: 'select', options: [ ['-1','我现在不确定'], ['1','是的, 我确定启用它'], ['0','不, 我不想启用它'] ], value: nvram.tomatoanon_enable, suffix: ' '}
 ]);
 </script>
 </div>
@@ -102,7 +102,7 @@ createFieldTable('', [
 ]);
 </script>
 <ul>
-	<li>当有新的 Tomato 版本可以更新时，将在“系统状态”页面通知您.
+	<li>当有可更新的 Tomato 版本时，将在“系统状态”页面通知您.
 </ul>
 </div>
 </form>

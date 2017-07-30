@@ -13,7 +13,7 @@ No part of this file may be used without permission.
 <head>
 <meta http-equiv='content-type' content='text/html;charset=utf-8'>
 <meta name='robots' content='noindex,nofollow'>
-<title>[<% ident(); %>] 基本设置: 静态DHCP/ARP/IPT</title>
+<title>[<% ident(); %>] 基本设置: 静态 DHCP/ARP/IPT</title>
 <link rel='stylesheet' type='text/css' href='tomato.css'>
 <% css(); %>
 <script type='text/javascript' src='tomato.js'></script>
@@ -326,7 +326,7 @@ return 1;
 <div class='section'>
 <script type='text/javascript'>
 createFieldTable('', [
-{ title: '忽略未知设备的 DHCP 请求', name: 'f_dhcpd_static_only', type: 'checkbox', value: nvram.dhcpd_static_only == '1' }
+{ title: '忽略未知设备的<br>DHCP 请求', name: 'f_dhcpd_static_only', type: 'checkbox', value: nvram.dhcpd_static_only == '1' }
 ]);
 </script>
 </div>

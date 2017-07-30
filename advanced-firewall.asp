@@ -122,8 +122,8 @@ createFieldTable('', [
 	{ title: 'ICMP', indent: 2, name: 'f_icmp_limit_icmp', type: 'text', maxlen: 3, size: 3, suffix: ' <small> 每秒响应次数</small>', value: fixInt(nvram.block_wan_limit_icmp || 1, 1, 300, 5) },
 	{ title: 'Traceroute', indent: 2, name: 'f_icmp_limit_traceroute', type: 'text', maxlen: 3, size: 3, suffix: ' <small> 每秒响应次数</small>', value: fixInt(nvram.block_wan_limit_tr || 5, 1, 300, 5) },
 null,
-	{ title: '启用 cookies SYN cookies', name: 'f_syncookies', type: 'checkbox', value: nvram.ne_syncookies != '0' },
-	{ title: '启用 DSCP Fix', name: 'f_DSCP_fix_enable', type: 'checkbox', value: nvram.DSCP_fix_enable != '0', suffix: ' <small>Fixes Comcast incorrect DSCP</small>' },
+	{ title: '启用 SYN cookies', name: 'f_syncookies', type: 'checkbox', value: nvram.ne_syncookies != '0' },
+	{ title: '启用 DSCP Fix', name: 'f_DSCP_fix_enable', type: 'checkbox', value: nvram.DSCP_fix_enable != '0', suffix: ' <small>修复 Comcast 不正确的 DSCP</small>' },
 	{ title: 'IPv6 安全通道', name: 'f_ipv6_ipsec', type: 'checkbox', value: nvram.ipv6_ipsec != '0' }
 ]);
 </script>

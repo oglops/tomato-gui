@@ -90,7 +90,7 @@ form.submit('aco-reset-form');
 		</script>
 		.cfg &nbsp;
 		<input type='button' name='f_backup_button' onclick='backupButton()' value='备份'><br>
-		<a href='' id='backup-link'>Link</a>
+		<a href='' id='backup-link'>下载链接</a>
 </form>
 </div>
 <br><br>

@@ -327,7 +327,7 @@ form.submit(fom, 1);
 dns = nvram.ipv6_dns.split(/\s+/);
 createFieldTable('', [
 	{ title: 'IPv6 服务类型', name: 'ipv6_service', type: 'select', 
-		options: [['', '禁用'],['native','ISP 原生 IPv6'],['native-pd','前缀授权 DHCPv6'],['6to4','6to4 中继'],['sit','6in4 静态隧道'],['6rd','6rd 中继'],['6rd-pd','6rd 从 DHCPv4 派生(可选212'],['other','其他（手动配置)']],
+		options: [['', '禁用'],['native','ISP 原生 IPv6'],['native-pd','前缀授权 DHCPv6'],['6to4','6to4 中继'],['sit','6in4 静态隧道'],['6rd','6rd 中继'],['6rd-pd','6rd 从 DHCPv4 派生(可选212)'],['other','其他（手动配置)']],
 value: nvram.ipv6_service },
 	{ title: 'IPv6 广域网接口', name: 'ipv6_ifname', type: 'text', maxlen: 8, size: 10, value: nvram.ipv6_ifname },
 null,
@@ -335,7 +335,7 @@ null,
 	{ title: '6rd 路由前缀', name: 'ipv6_6rd_prefix', type: 'text', maxlen: 46, size: 48, value: nvram.ipv6_6rd_prefix },
 	{ title: '6rd 前缀长度', name: 'ipv6_6rd_prefix_length', type: 'text', maxlen: 3, size: 5, value: nvram.ipv6_6rd_prefix_length, suffix: ' <small>(通常是 32)</small>' },
 	{ title: '前缀长度', name: 'f_ipv6_prefix_length', type: 'text', maxlen: 3, size: 5, value: nvram.ipv6_prefix_length },
-{ title: '只有 PD 请求', name: 'f_ipv6_pdonly', type: 'checkbox', value: (nvram.ipv6_pdonly != '0') },
+{ title: '仅请求前缀委派(PD)', name: 'f_ipv6_pdonly', type: 'checkbox', value: (nvram.ipv6_pdonly != '0') },
 	{ title: '路由器 IPv6 地址', multi: [
 		{ name: 'f_ipv6_rtr_addr_auto', type: 'select', options: [['0', '默认'],['1','手动']], value: (nvram.ipv6_rtr_addr == '' ? '0' : '1') },
 { name: 'f_ipv6_rtr_addr', type: 'text', maxlen: 46, size: 48, value: nvram.ipv6_rtr_addr }
@@ -374,7 +374,7 @@ null,
 <div class='section'>
 <br>
 <ul>
-	<li><b>Request PD Only:</b> Check for ISP's that require only a Prefix Delegation(usually PPPOE(Dsl,Fiber?) connections).</li>
+	<li><b>仅请求前缀委派:</b> 当 ISP 只要求设置前缀委派时勾选(通常线路是 PPPOE(Dsl,光纤?)).</li>
 </ul>
 </div>
 

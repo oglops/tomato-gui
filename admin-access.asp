@@ -263,7 +263,7 @@ value:  (nvram.remote_management == 1) ? ((nvram.remote_mgt_https == 1) ? 2 : 1)
 	{ title: '允许无线访问', name: 'f_http_wireless', type: 'checkbox', value:  nvram.web_wl_filter == 0 },
 null,
 	{ title: '界面文件目录', name: 'web_dir', type: 'select',
-		options: [['default','默认: /www'], ['jffs', 'Custom: /jffs/www(仅限有经验者使用!)'], ['opt', 'Custom: /opt/www (仅限有经验者使用!)'], ['tmp', 'Custom: /tmp/www (仅限有经验者使用!)']], value: nvram.web_dir, suffix: ' <small>更改前请确认要这么做!</small>' },
+		options: [['default','默认: /www'], ['jffs', '自定义: /jffs/www (仅限有经验者使用!)'], ['opt', '自定义: /opt/www (仅限有经验者使用!)'], ['tmp', '自定义: /tmp/www (仅限有经验者使用!)']], value: nvram.web_dir, suffix: ' <small>更改前请确认要这么做!</small>' },
 	{ title: '配色方案', name: 'web_css', type: 'select',
 		options: [['openlinksys','USB Blue - OpenLinksys'],['red','Tomato'],['ext/custom','自定义 (ext/custom.css)'], ['online', 'TTB在线主题']], value: nvram.web_css },
 	{ title: 'TTB ID#', indent: 2, name: 'ttb_css', type: 'text', maxlen: 25, size: 30, value: nvram.ttb_css, suffix: ' 主题名称.来自 <a href="http://www.tomatothemebase.eu" target="_blanc"><u><i>TTB themes gallery</i></u></a>' },

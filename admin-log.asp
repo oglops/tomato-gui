@@ -181,13 +181,13 @@ createFieldTable('', [
 <script type='text/javascript'>
 createFieldTable('', [
 	{ title: '启用网站访问历史', name: 'f_log_wm', type: 'checkbox', value: nvram.log_wm == 1 },
-	{ title: '监测范围(局域网电脑)', name: 'log_wmtype', type: 'select', options: [[0,'All Computers / Devices'],[1,'The Following...'],[2,'All Except...']], value: nvram.log_wmtype },
+	{ title: '监测范围(局域网电脑)', name: 'log_wmtype', type: 'select', options: [[0,'所有计算机 / 设备'],[1,'以下设备...'],[2,'所有设备 但排除...']], value: nvram.log_wmtype },
 		{ title: 'IP 地址(es)', indent: 2,  name: 'f_log_wmip', type: 'text', maxlen: 512, size: 64, value: nvram.log_wmip,
 		  suffix: '<br><small>(例如: "1.1.1.1", "1.1.1.0/24" 或者 "1.1.1.1 - 2.2.2.2")</small>' },
 	{ title: '保留记录数量' },
 		{ title: '域名', indent: 2,  name: 'log_wmdmax', type: 'text', maxlen: 4, size: 6, value: nvram.log_wmdmax, suffix: ' <small>(0 表示禁用)</small>' },
 		{ title: '搜索关键字', indent: 2, name: 'log_wmsmax', type: 'text', maxlen: 4, size: 6, value: nvram.log_wmsmax, suffix: ' <small>(0 表示禁用)</small>' },
-	{ title: '每日备份', name: 'f_webmon_bkp', type: 'checkbox', value: nvram.webmon_bkp == 1, suffix: ' <small>(every day at midnight)</small>' },
+	{ title: '每日备份', name: 'f_webmon_bkp', type: 'checkbox', value: nvram.webmon_bkp == 1, suffix: ' <small>(每天午夜)</small>' },
 		{ title: '备份后清除数据', indent: 2, name: 'f_webmon_shrink', type: 'checkbox', value: nvram.webmon_shrink == 1 },
 		{ title: '备份保存目录', indent: 2,  name: 'webmon_dir', type: 'text', maxlen: 128, size: 30, value: nvram.webmon_dir, suffix: ' <small>(确保该目录存在并可写)</small>' }
 ]);

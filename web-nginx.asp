@@ -14,7 +14,7 @@ No part of this file can be used or modified without permission.
 <head>
 <meta http-equiv='content-type' content='text/html;charset=utf-8'>
 <meta name='robots' content='noindex,nofollow'>
-<title>[<% ident(); %>] Web Server Menu</title>
+<title>[<% ident(); %>] Web 服务器</title>
 <link rel='stylesheet' type='text/css' href='tomato.css'>
 <link rel='stylesheet' type='text/css' href='color.css'>
 <script type='text/javascript' src='tomato.js'></script>
@@ -35,7 +35,7 @@ nginxup = parseInt ('<% psup("nginx"); %>');
 function toggle(service, isup)
 {
 if (changed) {
-if (!confirm("Unsaved changes will be lost. Continue anyway?")) return;
+if (!confirm("未保存的更改将丢失. 确定要继续吗?")) return;
 }
 E('_' + service + '_button').disabled = true;
 form.submitHidden('/service.cgi', {
@@ -102,12 +102,12 @@ verifyFields(null, 1);
 <div class='section-title'>Status</div>
 <div class='section' id='status-section'>
 <script type='text/javascript'>
-W('NGINX is currently '+(!nginxup ? 'stopped' : 'running')+' ');
-W('<input type="button" value="' + (nginxup ? 'Stop' : 'Start') + ' Now" onclick="toggle(\'nginxfp\', nginxup)" id="_nginxfp_button">');
+W('NGINX 服务器现在 '+(!nginxup ? '已停止' : '运行中')+' ');
+W('<input type="button" value="' + (nginxup ? '停止' : '现在启动') + ' " onclick="toggle(\'nginxfp\', nginxup)" id="_nginxfp_button">');
 </script>
 <br>
 </div>
-<div class='section-title'>Basic Settings</div>
+<div class='section-title'>基本设置</div>
 <div class='section' id='config-section'>
 <form id='_fom' method='post' action='tomato.cgi'>
 <input type='hidden' name='_nextpage' value='web-nginx.asp'>
@@ -121,57 +121,56 @@ W('<input type="button" value="' + (nginxup ? 'Stop' : 'Start') + ' Now" onclick
 <input type='hidden' name='nginx_override'>
 <script type='text/javascript'>
 createFieldTable('', [
-{ title: 'Enable Server on Start', name: 'f_nginx_enable', type: 'checkbox', value: nvram.nginx_enable == '1'},
-{ title: 'Enable PHP support', name: 'f_nginx_php', type: 'checkbox', value: nvram.nginx_php == '1' },
-{ title: 'Run As', name: 'nginx_user', type: 'select',
+{ title: '开机时启动服务', name: 'f_nginx_enable', type: 'checkbox', value: nvram.nginx_enable == '1'},
+{ title: '启用 PHP 支持', name: 'f_nginx_php', type: 'checkbox', value: nvram.nginx_php == '1' },
+{ title: '以用户身份运行', name: 'nginx_user', type: 'select',
 options: [['root','Root'],['nobody','Nobody']], value: nvram.nginx_user },
-{ title: 'Keep Config Files', name: 'f_nginx_keepconf', type: 'checkbox', value: nvram.nginx_keepconf == '1' },
-{ title: 'Web Server Port', name: 'nginx_port', type: 'text', maxlen: 5, size: 7, value: fixPort(nvram.nginx_port, 85), suffix: '<small> default: 85</small>' },
-{ title: 'Upload file size limit', name: 'nginx_upload', type: 'text', maxlen: 5, size: 7, value: nvram.nginx_upload, suffix: '<small> MB</small>'},
-{ title: 'Allow Remote Access', name: 'f_nginx_remote', type: 'checkbox', value: nvram.nginx_remote == '1' },
-{ title: 'Web Server Name', name: 'nginx_fqdn', type: 'text', maxlen: 255, size: 20, value: nvram.nginx_fqdn },
-{ title: 'Server Root Path', name: 'nginx_docroot', type: 'text', maxlen: 255, size: 40, value: nvram.nginx_docroot, suffix: '<small>&nbsp;/index.html / index.htm / index.php</small>' },
-{ title: 'Server Priority', name: 'nginx_priority', type: 'text', maxlen: 8, size:3, value: nvram.nginx_priority, suffix:'<small> Max. Perfor: -20, Min.Perfor: 19, default: 10</small>' }
+{ title: '保存配置文件', name: 'f_nginx_keepconf', type: 'checkbox', value: nvram.nginx_keepconf == '1' },
+{ title: 'Web 服务器端口', name: 'nginx_port', type: 'text', maxlen: 5, size: 7, value: fixPort(nvram.nginx_port, 85), suffix: '<small> 默认: 85</small>' },
+{ title: '上传文件大小限制', name: 'nginx_upload', type: 'text', maxlen: 5, size: 7, value: nvram.nginx_upload, suffix: '<small> MB</small>'},
+{ title: '允许远程访问', name: 'f_nginx_remote', type: 'checkbox', value: nvram.nginx_remote == '1' },
+{ title: 'Web 服务器名', name: 'nginx_fqdn', type: 'text', maxlen: 255, size: 20, value: nvram.nginx_fqdn },
+{ title: '服务器根目录', name: 'nginx_docroot', type: 'text', maxlen: 255, size: 40, value: nvram.nginx_docroot, suffix: '<small>&nbsp;/index.html / index.htm / index.php</small>' },
+{ title: '服务器优先级', name: 'nginx_priority', type: 'text', maxlen: 8, size:3, value: nvram.nginx_priority, suffix:'<small> 最大优先级: -20, 最小优先级: 19, 默认: 10</small>' }
 ]);
 </script>
 </div>
-<div class='section-title'>Advanced Settings</div>
+<div class='section-title'>高级设置</div>
 <div class='section'>
 <script type='text/javascript'>
 createFieldTable('', [
-{ title: '<a href="http://wiki.nginx.org/Configuration" target="_new">NGINX</a><br>HTTP Section<br>Custom configuration', name: 'nginx_httpcustom', type: 'textarea', value: nvram.nginx_httpcustom },
-{ title: '<a href="http://wiki.nginx.org/Configuration" target="_new">NGINX</a><br>SERVER Section<br>Custom configuration', name: 'nginx_servercustom', type: 'textarea', value: nvram.nginx_servercustom },
-{ title: '<a href="http://wiki.nginx.org/Configuration" target="_new">NGINX</a><br>Custom configuration', name: 'nginx_custom', type: 'textarea', value: nvram.nginx_custom },
-{ title: '<a href="http://php.net/manual/en/ini.php" target="_new">PHP</a><br>Custom configuration', name: 'nginx_phpconf', type: 'textarea', value: nvram.nginx_phpconf },
+{ title: '<a href="http://wiki.nginx.org/Configuration" target="_new">NGINX</a><br>HTTP Section<br> 自定义配置', name: 'nginx_httpcustom', type: 'textarea', value: nvram.nginx_httpcustom },
+{ title: '<a href="http://wiki.nginx.org/Configuration" target="_new">NGINX</a><br>SERVER Section<br> 自定义配置', name: 'nginx_servercustom', type: 'textarea', value: nvram.nginx_servercustom },
+{ title: '<a href="http://wiki.nginx.org/Configuration" target="_new">NGINX</a><br> 自定义配置', name: 'nginx_custom', type: 'textarea', value: nvram.nginx_custom },
+{ title: '<a href="http://php.net/manual/en/ini.php" target="_new">PHP</a><br> 自定义配置', name: 'nginx_phpconf', type: 'textarea', value: nvram.nginx_phpconf },
 null,
-{ title: 'Use user config file', name: 'f_nginx_override', type: 'checkbox', value: nvram.nginx_override == '1', suffix: '<small> User config file will be used, some of GUI settings will be ignored</small>' },
-{ title: 'User config file path', name: 'nginx_overridefile', type: 'text', maxlen: 255, size: 40, value: nvram.nginx_overridefile }
+{ title: '使用用户配置文件', name: 'f_nginx_override', type: 'checkbox', value: nvram.nginx_override == '1', suffix: '<small> 如果使用户配置文件, 一些本页面上的GUI设置将被忽略</small>' },
+{ title: '用户配置文件路径', name: 'nginx_overridefile', type: 'text', maxlen: 255, size: 40, value: nvram.nginx_overridefile }
 ]);
 </script>
 </div>
-<div class='section-title'>Notes</div>
+<div class='section-title'>说明</div>
 <div class='section'>
 <ul>
-<li><b> Status Button:</b> Quick Start-Stop Service. Enable Web Server must be checked to modify settings.<br>
-<li><b> Enable Server on Start:</b> To activate the Web Server tick and save this screen.<br>
-<li><b> Enable PHP support:</b> To activate the PHP support (php-cgi) tick and save this screen.<br>
-<li><b> Run As:</b> Select user used to start nginx and php-cgi daemon.<br>
-<li><b> Keep Config Files:</b> Have you modified the configuration file manually? Tick this box and changes will be maintained.<br> 
-<li><b> Web Server Port:</b> The Port used by the Web Server to be accessed. Check conflict when the port is used by other services.<br>
-<li><b> Allow remote access:</b> This option will open the Web Server GUI port from the WAN side. Service will be accessed from the internet. <br>
-<li><b> Web Server Name:</b> Name that will appear on top of your Internet Browser.<br>0
-<li><b> Document Root Path:</b> The path in your router where documents are stored.<br>
-<li><b> Examples:<br></b>
-/tmp/mnt/HDD/www as you can find in USB mount path.<br>
-<li><b> NGINX Custom Configuration:</b> You can add other values to nginx.conf to suit your needs.<br>
-<li><b> NGINX HTTP Section Custom Configuration:</b> You can add other values to nginx.conf in declaration of http {} to suit your needs.<br>
-<li><b> NGINX SERVER Section Custom Configuration:</b> You can add other values to nginx.conf in declaration of server {} to suit your needs.<br>
-<li><b> PHP Custom Configuration:</b> You can add other values to php.ini to suit your needs.<br>
-<li><b> Server Priority:</b> Sets the service priority over other processes running on the router.<br><br>
-The operating system kernel has priority -5.<br>
-Never select a lower value than the kernel uses. Do not use the service test page to adjust the<br>
-server performance, it's performance is lower than the definitive media where files will be <br>
-located, i.e; USB Stick, Hard Drive or SSD.<br>
+<li><b> 状态按钮:</b> 快速启动/停止服务. 勾选"启用 Web 服务器"之后才能更改此设置.<br>
+<li><b> 开机时启动服务:</b> 勾选后路由器启动时将自动启动 Web 服务器.<br>
+<li><b> 启用 PHP 支持:</b> 勾选后启用 PHP support (php-cgi) 支持.<br>
+<li><b> 以用户身份运行:</b> 选择启动 nginx 和 php-cgi 服务的用户.<br>
+<li><b> 保存配置文件:</b> 如果你手动修改了配置文件? 勾选此选项可以确保配置被保存.<br> 
+<li><b> Web 服务器端口:</b> 访问Web 服务器的端口. 请确保此端口没有被其他服务占用.<br>
+<li><b> 允许远程访问:</b> 这个选项将允许从广域网端口访问Web服务器的GUI, 服务将可以从互联网被访问. <br>
+<li><b> Web 服务器名:</b> 该名字将出现在你的浏览器上.<br>0
+<li><b> 服务器根目录:</b> 在你路由器上文档的存储路径.<br>
+<li><b> 例如:<br></b>
+/tmp/mnt/HDD/www 你可以参考 USB 挂载路径.<br>
+<li><b> NGINX 自定义配置:</b> 你可以在 nginx.conf 里添加其他的设置来满足你的需求.<br>
+<li><b> NGINX HTTP Section 自定义配置:</b> 你可以在 nginx.conf 里的 http {} 部分添加其他的设置来满足你的需求.<br>
+<li><b> NGINX SERVER Section 自定义配置:</b> 你可以在 nginx.conf 里的 server {} 部分添加其他的设置来满足你的需求.<br>
+<li><b> PHP 自定义配置:</b> 你可以在 php.ini 里添加其他的设置来满足你的需求.<br>
+<li><b> 服务器优先级:</b> 设置服务的优先级，相对于运行在路由器上的其他进程.<br><br>
+操作系统内和的优先级是 -5.<br>
+永远不要选择低于内核使用的值。不要使用服务测试页面来调整服务性能<br>
+它的性能取决于媒体所处的位置, 如; 优盘, 硬盘 或 SSD.<br>
 </ul>
 </div>
 </form>
@@ -183,8 +182,8 @@ located, i.e; USB Stick, Hard Drive or SSD.<br>
 <tr><td id='footer' colspan=2>
 <form>
 <span id='footer-msg'></span>
-<input type='button' value='Save' id='save-button' onclick='save()'>
-<input type='button' value='Cancel' id='cancel-button' onclick='javascript:reloadPage();'>
+<input type='button' value='保存设置' id='save-button' onclick='save()'>
+<input type='button' value='取消设置' id='cancel-button' onclick='javascript:reloadPage();'>
 </form>
 </td></tr>
 </table>

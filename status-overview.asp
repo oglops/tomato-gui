@@ -338,8 +338,8 @@ cookie.set('status_overview_' + whichone + '_vis', 1);
 </div>
 <div style='display:none' id='att1'>
 <div class='section-title'><center>!! 注意 !!</center></div>
-<div class='fields'><center>您还没有配置 <b>TomatoAnon 项目</b> setting.
-<br>请到 <a href='admin-tomatoanon.asp'>TomatoAnon 设置页面</a> 选择.</center></div>
+<div class='fields'><center>您还没有配置 <b>TomatoAnon 项目</b>.
+<br>请到 <a href='admin-tomatoanon.asp'>TomatoAnon 页面</a> 进行配置.</center></div>
 <br>
 </div>
 
@@ -368,7 +368,7 @@ null,
 <script type='text/javascript'>
 for (var uidx = 1; uidx <= nvram.mwan_num; ++uidx) {
 var u = (uidx>1) ? uidx : '';
-W('<div class=\'section-title\' id=\'wan'+u+'-title\'>WAN'+u+' <small><i><a href=\'javascript:toggleVisibility("wan' + u + '");\'><span id=\'sesdiv_wan' +u + '_showhide\'>(hide)</span></a></i></small></div>');
+W('<div class=\'section-title\' id=\'wan'+u+'-title\'>WAN'+u+' <small><i><a href=\'javascript:toggleVisibility("wan' + u + '");\'><span id=\'sesdiv_wan' +u + '_showhide\'>(隐藏)</span></a></i></small></div>');
 W('<div class=\'section\' id=\'sesdiv_wan'+u+'\'>');
 createFieldTable('', [
 		{ title: 'MAC 地址', text: nvram['wan'+u+'_hwaddr'] },
@@ -395,7 +395,7 @@ W('<input type=\'button\' class=\'controls\' onclick=\'wan_disconnect('+uidx+')\
 W('</div>');
 }
 </script>
-<div class='section-title'>LAN <small><i><a href='javascript:toggleVisibility("lan");'><span id='sesdiv_lan_showhide'>(hide)</span></a></i></small></div>
+<div class='section-title'>LAN <small><i><a href='javascript:toggleVisibility("lan");'><span id='sesdiv_lan_showhide'>(隐藏)</span></a></i></small></div>
 <div class='section' id='sesdiv_lan'>
 <script type='text/javascript'>
 function h_countbitsfromleft(num) {

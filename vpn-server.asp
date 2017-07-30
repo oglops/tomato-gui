@@ -509,7 +509,7 @@ createFieldTable('', [
 ]);
 W('</div>');
 W('<div id=\''+t+'-keys\'>');
-	W('<p class=\'keyhelp\'>有关密钥的生成,请参考OpenVPN的 <a id=\''+t+'-keyhelp\'>教程</a>.</p>');
+	W('<p class=\'keyhelp\'>关于生成密钥的帮助,请参考 OpenVPN 的 <a id=\''+t+'-keyhelp\'>教程</a>.</p>');
 createFieldTable('', [
 		{ title: '静态密钥', name: 'vpn_'+t+'_static', type: 'textarea', value: eval( 'nvram.vpn_'+t+'_static' ) },
 		{ title: '证书颁发机构', name: 'vpn_'+t+'_ca', type: 'textarea', value: eval( 'nvram.vpn_'+t+'_ca' ) },
@@ -529,7 +529,7 @@ W('<div id=\''+t+'-status-errors\' class=\'error\'></div>');
 W('</div>');
 		W('<div style=\'text-align:right\'><a href=\'javascript:updateStatus('+i+')\'>刷新状态</a></div>');
 W('</div>');
-	W('<input type="button" value="' + (eval('vpn'+(i+1)+'up') ? '停止' : '启动') + ' Now" onclick="toggle(\'vpn'+t+'\', vpn'+(i+1)+'up)" id="_vpn'+t+'_button">');
+	W('<input type="button" value="' + (eval('vpn'+(i+1)+'up') ? '停止' : '启动') + ' " onclick="toggle(\'vpn'+t+'\', vpn'+(i+1)+'up)" id="_vpn'+t+'_button">');
 W('</div>');
 }
 </script>

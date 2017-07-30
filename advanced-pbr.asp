@@ -10,7 +10,7 @@ No part of this file may be used without permission.
 <head>
 <meta http-equiv='content-type' content='text/html;charset=utf-8'>
 <meta name='robots' content='noindex,nofollow'>
-<title>[<% ident(); %>] MultiWAN Routing Policy</title>
+<title>[<% ident(); %>] MultiWAN 路由策略</title>
 <link rel='stylesheet' type='text/css' href='tomato.css'>
 <% css(); %>
 <script type='text/javascript' src='tomato.js'></script>
@@ -213,25 +213,25 @@ return v_length(f[9], quiet);
 }
 pbr.setup = function() {
 var i, a, b;
-a = [[-2, 'All Protocols'],[-1,'TCP/UDP'],[6,'TCP'],[17,'UDP'],[2, 'ICMP']];
+a = [[-2, '所有协议'],[-1,'TCP/UDP'],[6,'TCP'],[17,'UDP'],[2, 'ICMP']];
 // what a mess...
 this.init('qg', 'move', 100, [
 { type: 'checkbox' },
 { type: 'select', prefix: '<div class="x2a">', suffix: '</div>', options: a },
 { multi: [
-{ type: 'select', options: [['0','All'],['1','IP'],['2','MAC']], prefix: '<div class="x1a">', suffix: '</div>' },
+{ type: 'select', options: [['0','所有'],['1','IP'],['2','MAC']], prefix: '<div class="x1a">', suffix: '</div>' },
 { type: 'text', prefix: '<div class="x1b">', suffix: '</div>' },
-{ type: 'text', prefix: '<div class="x1c">Port', suffix: '</div>' }
+{ type: 'text', prefix: '<div class="x1c">端口', suffix: '</div>' }
 ] },
 { multi: [
-{ type: 'select', options: [['0','All'],['1','IP'],['3','Domain']], prefix: '<div class="x1a">', suffix: '</div>' },
+{ type: 'select', options: [['0','所有'],['1','IP'],['3','Domain']], prefix: '<div class="x1a">', suffix: '</div>' },
 { type: 'text', prefix: '<div class="x1b">', suffix: '</div>' },
-{ type: 'text', prefix: '<div class="x1c">Port', suffix: '</div>' }
+{ type: 'text', prefix: '<div class="x1c">端口', suffix: '</div>' }
 ] },
 { type: 'select', options: class1, vtop: 1 },
 { type: 'text', maxlen: 32, vtop: 1 }
 ]);
-this.headerSet(['On', 'Protocol', 'Source Address', 'Destination Address', 'Select WAN', 'Description']);
+this.headerSet(['启用', '协议', '源地址', '目标地址', '选择 WAN', '描述']);
 /*  Enable(0) < SAddrType(1) < SAddrValue(2) < ProtoType(3) < PortValue(4) < DAddrType(5) < DAddrValue(6) < ProtoType(7) <PortValue(8) < WANx(9) < Desc(10) */
 a = nvram.pbr_rules.split('>');
 if (a != '') {
@@ -285,19 +285,19 @@ pbr.recolor();
 <input type='hidden' name='_nextpage' value='advanced-pbr.asp'>
 <input type='hidden' name='_service' value='firewall-restart'>
 <input type='hidden' name='pbr_rules'>
-<div class='section-title'>Rules</div>
+<div class='section-title'>规则列表</div>
 <div class='section'>
 <table class='tomato-grid' cellspacing=1 id='qg'></table>
 </div>
 <div>
 <hr>
-Note: Policy routing traffic only work on the LAN to the Internet.<br>
+说明: 路由流量策略仅对从LAN到互联网的流量有效.<br>
 </div>
 </td></tr>
 <tr><td id='footer' colspan=2>
 <span id='footer-msg'></span>
-<input type='button' value='Save' id='save-button' onclick='save()'>
-<input type='button' value='Cancel' id='cancel-button' onclick='reloadPage();'>
+<input type='button' value='保存设置' id='save-button' onclick='save()'>
+<input type='button' value='取消设置' id='cancel-button' onclick='reloadPage();'>
 </td></tr>
 </table>
 </form>

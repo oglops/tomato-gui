@@ -42,7 +42,7 @@ if ((name.length <= 5) || (name.substring(name.length - 5, name.length).toLowerC
  alert('文件名错误, 正确的扩展名是 ".html".');
 return;
 }
-if (!confirm('Are you sure the file' + name + 'must be uploaded to the device?')) return;
+if (!confirm('你确定要上传文件' + name + '到路由器吗?')) return;
 E('upload-button').disabled = 1;
 fields.disableAll(E('config-section'), 1);
 fields.disableAll(E('footer'), 1);

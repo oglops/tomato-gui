@@ -2129,7 +2129,7 @@ null,
 			['名称设置',		'ident.asp'],
 			['时间设置',			'time.asp'],
 			['动态域名',			'ddns.asp'],
-			['静态 DHCP/ARP/IPT',		'static.asp'],
+			['静态<br>DHCP/ARP/IPT',		'static.asp'],
 			['无线过滤',		'wfilter.asp'] ] ],
 		['高级设置', 			'advanced', 0, [
 			['连接数/超时设置',		'ctnf.asp'],
@@ -2171,7 +2171,7 @@ null,
 		['IP 带宽限制',		'bwlimit.asp'],
 null,
 /* NOCAT-BEGIN */
-		['网页认证l',		'splashd.asp'],
+		['网页认证',		'splashd.asp'],
 /* NOCAT-END */
 /* NGINX-BEGIN */
 ['Web 服务器',			'web', 0, [
@@ -2220,7 +2220,7 @@ REMOVE-END */
 			['PPTP 客户端',			'pptp.asp']
 /* PPTPD-END */
 /* TINC-BEGIN */
-,['Tinc Daemon',		'tinc.asp']
+,['Tinc 服务',		'tinc.asp']
 /* TINC-END */
 ] ],
 /* VPN-END */

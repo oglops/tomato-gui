@@ -58,7 +58,7 @@ var th = new TomatoGrid();
 var cmd = null;
 var cmdresult = '';
 
-tabs = [['config', '配置'],['hosts', '主机'],['scripts', '脚本'],['keys', '产生密钥'],['status', '状态']];
+tabs = [['config', '配置'],['hosts', '主机'],['scripts', '脚本'],['keys', '生成密钥'],['status', '状态']];
 changed = 0;
 tincup = parseInt ('<% psup("tincd"); %>');
 th.setup = function() {
@@ -476,7 +476,7 @@ createFieldTable('', [
 
 	W('<small><b style=\'font-size: 1.5em\'>*</b> tinc1.0 节点仅需要创建传统的连接.</small>');
 W('</div>');
-	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' Now" onclick="toggle(\'tinc\', tincup)" id="_tinc_button1">');
+	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' " onclick="toggle(\'tinc\', tincup)" id="_tinc_button1">');
 W('</div>');
 // -------- END CONFIG TAB -----------
 // -------- BEGIN HOSTS TAB -----------
@@ -495,12 +495,12 @@ createFieldTable('', [
 
 	W('<small><b style=\'font-size: 1.5em\'>*</b> tinc1.0节点仅需要创建传统的连接.</small>');
 W('</div>');
-	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' Now" onclick="toggle(\'tinc\', tincup)" id="_tinc_button2">');
+	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' " onclick="toggle(\'tinc\', tincup)" id="_tinc_button2">');
 
 W('<br>');
 W('<br>');
 
-	W('<div class=\'section-title\'>Notes <small><i><a href=\'javascript:toggleVisibility(\"hosts\");\'><span id=\'sesdiv_hosts_showhide\'>(点击此处显示)</span></a></i></small></div>');
+	W('<div class=\'section-title\'>说明 <small><i><a href=\'javascript:toggleVisibility(\"hosts\");\'><span id=\'sesdiv_hosts_showhide\'>(点击此处显示)</span></a></i></small></div>');
 W('<div class=\'section\' id=\'sesdiv_hosts\' style=\'display:none\'>');
 W('<ul>');
 	W('<li><b>连接至</b> - Tinc 将尝试创建一个元连接到主机.需要地址字段');
@@ -522,16 +522,16 @@ W('<div class=\'section\'>');
 createFieldTable('', [
 		{ title: '防火墙规则', name: 'tinc_manual_firewall', type: 'select', options: [['0','自动'],['1','附加的'],['2','手动']], value: nvram.tinc_manual_firewall },
 		{ title: '防火墙', name: 'tinc_firewall', type: 'textarea', value: nvram.tinc_firewall },
-		{ title: 'tinc-up 创建', name: 'tinc_manual_tinc_up', type: 'select', options: [['0','自动'],['1','手动']], value: nvram.tinc_manual_tinc_up },
-{ title: 'tinc-up', name: 'tinc_tinc_up', type: 'textarea', value: nvram.tinc_tinc_up },
-{ title: 'tinc-down', name: 'tinc_tinc_down', type: 'textarea', value: nvram.tinc_tinc_down },
-{ title: 'host-up', name: 'tinc_host_up', type: 'textarea', value: nvram.tinc_host_up },
-{ title: 'host-down', name: 'tinc_host_down', type: 'textarea', value: nvram.tinc_host_down },
-{ title: 'subnet-up', name: 'tinc_subnet_up', type: 'textarea', value: nvram.tinc_subnet_up },
-{ title: 'subnet-down', name: 'tinc_subnet_down', type: 'textarea', value: nvram.tinc_subnet_down }
+		{ title: 'tinc 启动模式', name: 'tinc_manual_tinc_up', type: 'select', options: [['0','自动'],['1','手动']], value: nvram.tinc_manual_tinc_up },
+{ title: 'tinc 启动', name: 'tinc_tinc_up', type: 'textarea', value: nvram.tinc_tinc_up },
+{ title: 'tinc 关闭', name: 'tinc_tinc_down', type: 'textarea', value: nvram.tinc_tinc_down },
+{ title: '主机启动', name: 'tinc_host_up', type: 'textarea', value: nvram.tinc_host_up },
+{ title: '主机关闭', name: 'tinc_host_down', type: 'textarea', value: nvram.tinc_host_down },
+{ title: '子网建立', name: 'tinc_subnet_up', type: 'textarea', value: nvram.tinc_subnet_up },
+{ title: '子网取消', name: 'tinc_subnet_down', type: 'textarea', value: nvram.tinc_subnet_down }
 ]);
 W('</div>');
-	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' Now" onclick="toggle(\'tinc\', tincup)" id="_tinc_button3">');
+	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' " onclick="toggle(\'tinc\', tincup)" id="_tinc_button3">');
 W('</div>');
 // -------- END SCRIPTS TAB -----------
 // -------- BEGIN KEYS TAB -----------
@@ -556,7 +556,7 @@ W('<div id=\''+t+'-tab\'>');
 W('<br>');
 W('<div class=\'section\'>');
 	W('Tinc 目前 '+(!tincup ? '未运行.' : '正在运行.')+' ');
-	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' Now" onclick="toggle(\'tinc\', tincup)" id="_tinc_button4">');
+	W('<input type="button" value="' + (tincup ? '停止' : '启动') + ' " onclick="toggle(\'tinc\', tincup)" id="_tinc_button4">');
 W('</div>');
 W('<div class=\'section\'>');
 

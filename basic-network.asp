@@ -1813,15 +1813,15 @@ elem.display('wan'+u+'-title', 'sesdiv_wan'+u, curr_mwan_num >= uidx);
 }
 ckdst = nvram.mwan_ckdst.split(',');
 createFieldTable('', [
-{ title: 'Number of WAN Ports', name: 'mwan_num', type: 'select', options: [['1','1 WAN'],['2','2 WAN']
+{ title: 'WAN 端口数量', name: 'mwan_num', type: 'select', options: [['1','1 WAN'],['2','2 WAN']
 /* MULTIWAN-BEGIN */
 ,['3','3 WAN'],['4','4 WAN']
 /* MULTIWAN-END */
-], value: nvram.mwan_num, suffix: ' <small>Please configure <a href="advanced-vlan.asp">VLAN</a> first</small>' },
-{ title: 'Check connections every', name: 'mwan_cktime', type: 'select', options: [
-['0','Disabled'],['60','1 minute'],['120','2 minutes'],['180','3 minutes'],['300','5 minutes'],
-['600','10 minutes'],['900','15 minutes'],['1800','30 minutes'],['3600','1 hour']],
-		suffix: ' <small>(when the network conditionsis poor, try use longer detection period)</small>',
+], value: nvram.mwan_num, suffix: ' <small>请先配置 <a href="advanced-vlan.asp">VLAN</a></small>' },
+{ title: '检测连接间隔', name: 'mwan_cktime', type: 'select', options: [
+['0','禁用'],['60','1 分钟'],['120','2 分钟'],['180','3 分钟'],['300','5 分钟'],
+['600','10 分钟'],['900','15 分钟'],['1800','30 分钟'],['3600','1 小时']],
+		suffix: ' <small>(当网络状况差时, 请使用更长的检测间隔)</small>',
 value: nvram.mwan_cktime },
 { title: 'Target 1', indent: 2, name: 'f_mwan_ckdst_1', type: 'text', maxlen: 30, size: 30, value: ckdst[0] || ''},
 { title: 'Target 2', indent: 2, name: 'f_mwan_ckdst_2', type: 'text', maxlen: 30, size: 30, value: ckdst[1] || ''}
@@ -1845,7 +1845,7 @@ W('<input type=\'hidden\' name=\'wan'+u+'_dns\'>');
 W('<div class=\'section-title\' id=\'wan'+u+'-title\'>WAN'+u+' Settings</div>');
 W('<div class=\'section\' id=\'sesdiv_wan'+u+'\'>');
 createFieldTable('', [
-		{ title: '类型', name: 'wan'+u+'_proto', type: 'select', options: [['dhcp','DHCP'],['pppoe','PPPoE'],['static','Static'],['pptp','PPTP'],['l2tp','L2TP'],
+		{ title: '类型', name: 'wan'+u+'_proto', type: 'select', options: [['dhcp','DHCP'],['pppoe','PPPoE'],['static','静态 IP'],['pptp','PPTP'],['l2tp','L2TP'],
 /* LINUX26-BEGIN */
 /* USB-BEGIN */
 ['ppp3g','3G Modem'],
@@ -1856,10 +1856,10 @@ createFieldTable('', [
 value: nvram['wan'+u+'_proto'] },
 { title: '无线客户端模式', name: 'wan'+u+'_sta', type: 'select', options: sta_list, value: nvram['wan'+u+'_sta'] },
 		{ title: '上网卡设备', name: 'wan'+u+'_modem_dev', type: 'select', options: [['ttyUSB0', '/dev/ttyUSB0'],['ttyUSB1', '/dev/ttyUSB1'],['ttyUSB2', '/dev/ttyUSB2'],['ttyUSB3', '/dev/ttyUSB3'],['ttyUSB4', '/dev/ttyUSB4'],['ttyUSB5', '/dev/ttyUSB5'],['ttyUSB6', '/dev/ttyUSB6'],['ttyACM0', '/dev/ttyACM0']], value: nvram['wan'+u+'_modem_dev'] },
-{ title: '负载均衡', name: 'wan'+u+'_weight', type: 'text', maxlen: 3, size: 8, value: nvram['wan'+u+'_weight'], suffix: ' <i>(Failover: 0; Load balancing: 1 - 256)</i>' },
+{ title: '负载均衡', name: 'wan'+u+'_weight', type: 'text', maxlen: 3, size: 8, value: nvram['wan'+u+'_weight'], suffix: ' <i>(故障转移: 0; 负载均衡: 1 - 256)</i>' },
 		{ title: 'PIN 码', name: 'wan'+u+'_modem_pin', type: 'text', maxlen: 6, size: 8, value: nvram['wan'+u+'_modem_pin'], suffix: ' <i>建议关闭 PIN 码</i>' },
 		{ title: '拨号号码', name: 'wan'+u+'_modem_init', type: 'text', maxlen: 25, size: 32, value: nvram['wan'+u+'_modem_init'] },
-		{ title: 'APN 接入点', name: 'wan'+u+'_modem_apn', type: 'text', maxlen: 25, size: 32, suffix: ' <i>(if empty, AT+CGDCONT will not be sent)</i>', value: nvram['wan'+u+'_modem_apn'] },
+		{ title: 'APN 接入点', name: 'wan'+u+'_modem_apn', type: 'text', maxlen: 25, size: 32, suffix: ' <i>(如果为空, 则不发送 AT+CGDCONT)</i>', value: nvram['wan'+u+'_modem_apn'] },
 { title: '网络类型', name: 'wan'+u+'_modem_speed', type: 'select', options: [['00', 'Auto'],['030201', '4G/3G/2G'],['0302', '4G/3G only'],['03', '4G only'],['02', '3G only']], value: nvram['wan'+u+'_modem_speed'], suffix: ' <i>仅适用于非 Hilink 设备</i>' },
 		{ title: '用户名称', name: 'wan'+u+'_ppp_username', type: 'text', maxlen: 60, size: 64, value: nvram['wan'+u+'_ppp_username'] },
 		{ title: '用户密码', name: 'wan'+u+'_ppp_passwd', type: 'password', maxlen: 60, size: 64, peekaboo: 1, value: nvram['wan'+u+'_ppp_passwd'] },
@@ -1892,7 +1892,7 @@ value: nvram['wan'+u+'_pppoe_lef'] },
 		{ title: '上级路由器 IP 地址', name: 'wan'+u+'_modem_ipaddr', type: 'text', maxlen: 15, size: 17, suffix: ' <i>(必须与此路由器处于不同子网, 0.0.0.0 表示禁用)</i>', value: nvram['wan'+u+'_modem_ipaddr'] },
 { title: '看门狗模式', name: 'wan'+u+'_ckmtd', type: 'select', options: [['1','Ping'],['2','Traceroute*']], value: nvram['wan'+u+'_ckmtd'], suffix: ' <i>(默认：Traceroute; 仅当 Traceroute 不正常工作时，才使用 Ping</i>' },
 
-		{ title: '桥接 WAN 口到主 LAN 口 (br0)', name: 'f_wan'+u+'_islan', type: 'checkbox', value: (nvram['wan'+u+'_islan'] == 1) }
+		{ title: '桥接 WAN 口<br>到主 LAN 口 (br0)', name: 'f_wan'+u+'_islan', type: 'checkbox', value: (nvram['wan'+u+'_islan'] == 1) }
 ]);
 W('</div>');
 }

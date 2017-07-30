@@ -49,7 +49,7 @@ if (data[i][f] == v) return true;
 return false;
 }
 adblockg.dataToView = function(data) {
-return [(data[0] != '0') ? 'On' : '', data[1], data[2]];
+return [(data[0] != '0') ? '启用' : '', data[1], data[2]];
 }
 adblockg.fieldValuesToData = function(row) {
 var f = fields.getAll(row);
@@ -80,7 +80,7 @@ this.init('adblockg-grid', '', 50, [
 { type: 'text', maxlen: 90 },
 { type: 'text', maxlen: 40 }
 ]);
-this.headerSet(['On', 'Blacklist URL', 'Description']);
+this.headerSet(['启用', '黑名单 URL', '描述']);
 var s = nvram.adblock_blacklist.split('>');
 for (var i = 0; i < s.length; ++i) {
 var t = s[i].split('<');
@@ -126,33 +126,33 @@ adblockg.recolor();
 <input type='hidden' name='adblock_enable'>
 <input type='hidden' name='dnsmasq_debug'>
 <input type='hidden' name='adblock_blacklist'>
-<div class='section-title'>Adblock Settings</div>
+<div class='section-title'>Adblock 配置</div>
 <div class='section'>
 <script type='text/javascript'>
 createFieldTable('', [
-{ title: 'Enable', name: 'f_adblock_enable', type: 'checkbox', value: nvram.adblock_enable != '0' },
-{ title: 'Debug Mode', indent: 2, name: 'f_dnsmasq_debug', type: 'checkbox', value: nvram.dnsmasq_debug == '1' }
+{ title: '启用', name: 'f_adblock_enable', type: 'checkbox', value: nvram.adblock_enable != '0' },
+{ title: '调试模式', indent: 2, name: 'f_dnsmasq_debug', type: 'checkbox', value: nvram.dnsmasq_debug == '1' }
 ]);
 </script>
 </div>
-<div class='section-title'>Blacklist URL</div>
+<div class='section-title'>黑名单 URL</div>
 <div class='section'>
 <table class='tomato-grid' cellspacing=1 id='adblockg-grid'></table>
 <script type='text/javascript'>adblockg.setup();</script>
 </div>
-<div class='section-title'>Blacklist Custom</div>
+<div class='section-title'>自定义黑名单</div>
 <div class='section'>
 <script type='text/javascript'>
 createFieldTable('', [
-{ title: 'Blacklisted domains', name: 'adblock_blacklist_custom', type: 'textarea', value: nvram.adblock_blacklist_custom }
+{ title: '已加入黑名单的域名', name: 'adblock_blacklist_custom', type: 'textarea', value: nvram.adblock_blacklist_custom }
 ]);
 </script>
 </div>
-<div class='section-title'>Whitelist</div>
+<div class='section-title'>白名单</div>
 <div class='section'>
 <script type='text/javascript'>
 createFieldTable('', [
-{ title: 'Whitelisted domains', name: 'adblock_whitelist', type: 'textarea', value: nvram.adblock_whitelist }
+{ title: '已加入白名单的域名', name: 'adblock_whitelist', type: 'textarea', value: nvram.adblock_whitelist }
 ]);
 </script>
 </div>
@@ -172,8 +172,8 @@ createFieldTable('', [
 </td></tr>
 <tr><td id='footer' colspan=2>
 <span id='footer-msg'></span>
-<input type='button' value='Save' id='save-button' onclick='save()'>
-<input type='button' value='Cancel' id='cancel-button' onclick='reloadPage();'>
+<input type='button' value='保存设置' id='save-button' onclick='save()'>
+<input type='button' value='取消设置' id='cancel-button' onclick='reloadPage();'>
 </td></tr>
 </table>
 </form>

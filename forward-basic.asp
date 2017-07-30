@@ -70,7 +70,7 @@ break;
 return this.sortAscending ? r : -r;
 }
 fog.dataToView = function(data) {
-	return [(data[0] != '0') ? '是' : '', ['TCP', 'UDP', 'TCP / UDP'][data[1] - 1], (data[2].match(/(.+)-(.+)/)) ? (RegExp.$1 + ' -<br>' + RegExp.$2) : data[2], data[3], data[4], data[5], data[6]];
+	return [(data[0] != '0') ? '是' : '', ['TCP', 'UDP', 'Both'][data[1] - 1], (data[2].match(/(.+)-(.+)/)) ? (RegExp.$1 + ' -<br>' + RegExp.$2) : data[2], data[3], data[4], data[5], data[6]];
 }
 fog.fieldValuesToData = function(row) {
 var f = fields.getAll(row);

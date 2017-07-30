@@ -124,7 +124,7 @@ createFieldTable('', [
 { name: 'pptp_client_mru', type: 'text', maxlen: 4, size: 6, value: nvram.pptp_client_mru } ] },
     { title: '自定义配置', name: 'pptp_client_custom', type: 'textarea', value: nvram.pptp_client_custom }
 ]);
-    W('<input type="button" value="' + (pptpup ? '停止' : '启动') + ' Now" onclick="toggle(\'pptpclient\', pptpup)" id="_pptpclient_button">');
+    W('<input type="button" value="' + (pptpup ? '停止' : '启动') + ' " onclick="toggle(\'pptpclient\', pptpup)" id="_pptpclient_button">');
 </script>
 </div>
 

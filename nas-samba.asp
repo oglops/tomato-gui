@@ -183,11 +183,11 @@ function init()
 function toggleVisibility(whichone) {
 	if(E('sesdiv' + whichone).style.display=='') {
 		E('sesdiv' + whichone).style.display='none';
-		E('sesdiv' + whichone + 'showhide').innerHTML='(Click here to show)';
+		E('sesdiv' + whichone + 'showhide').innerHTML='(点击此处显示)';
 		cookie.set('nas_samba_' + whichone + '_vis', 0);
 	} else {
 		E('sesdiv' + whichone).style.display='';
-		E('sesdiv' + whichone + 'showhide').innerHTML='(Click here to hide)';
+		E('sesdiv' + whichone + 'showhide').innerHTML='(点击此处隐藏)';
 		cookie.set('nas_samba_' + whichone + '_vis', 1);
 	}
 }
@@ -235,7 +235,7 @@ value: nvram.smbd_wgroup },
 		suffix: ' <small> (Windows 中运行 cmd,输入 chcp 命令可查看系统代码页)</small>',
 value: nvram.smbd_cpage },
 	{ title: '网络接口', name: 'smbd_ifnames', type: 'text', maxlen: 50, size: 32,
-		suffix: ' <small> (space-delimited)</small>',
+		suffix: ' <small> (以空格分隔)</small>',
 		value: nvram.smbd_ifnames },
 	{ title: 'Samba<br>自定义配置', name: 'smbd_custom', type: 'textarea', value: nvram.smbd_custom },
 	{ title: '自动共享 USB 设备分区', name: 'smbd_autoshare', type: 'select',
@@ -260,7 +260,7 @@ value: nvram.smbd_autoshare },
 
 <!-- / / / -->
 
-<div class='section-title'>Notes <small><i><a href='javascript:toggleVisibility("notes");'><span id='sesdivnotesshowhide'>(Click here to show)</span></a></i></small></div>
+<div class='section-title'>说明 <small><i><a href='javascript:toggleVisibility("notes");'><span id='sesdivnotesshowhide'>(点击此处显示)</span></a></i></small></div>
 <div class='section' id='sesdivnotes' style='display:none'>
 <ul>
 <li><b>网络接口</b> - 以空格分隔的路由器接口名，Samba将绑定到这些接口.

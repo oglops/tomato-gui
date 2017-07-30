@@ -80,13 +80,13 @@ a = [];
 for (i = 1; i <= 8; ++i) a.push([i, i]);
 createFieldTable('', [
 	{ title: '避免执行 NVRAM 提交', name: 'f_debug_nocommit', type: 'checkbox', value: nvram.debug_nocommit != '0' },
-	{ title: '启用 将 cprintf 输出至控制台', name: 'f_debug_cprintf', type: 'checkbox', value: nvram.debug_cprintf != '0' },
-	{ title: '启用 cprintf 输出至 /tmp/cprintf', name: 'f_debug_cprintf_file', type: 'checkbox', value: nvram.debug_cprintf_file != '0' },
-	{ title: '启用 DDNS 输出至 /tmp/mdu-*', name: 'f_debug_ddns', type: 'checkbox', value: nvram.debug_ddns != '0' },
-	{ title: '将缓存内存和缓冲区计算为可用内存', name: 'f_cafree', type: 'checkbox', value: nvram.t_cafree == '1' },
-	{ title: '在路由器连接中不显示 LAN', name: 'f_hidelr', type: 'checkbox', value: nvram.t_hidelr == '1' },
+	{ title: '启用 将 cprintf<br>输出至控制台', name: 'f_debug_cprintf', type: 'checkbox', value: nvram.debug_cprintf != '0' },
+	{ title: '启用 cprintf<br>输出至 /tmp/cprintf', name: 'f_debug_cprintf_file', type: 'checkbox', value: nvram.debug_cprintf_file != '0' },
+	{ title: '启用 DDNS<br>输出至 /tmp/mdu-*', name: 'f_debug_ddns', type: 'checkbox', value: nvram.debug_ddns != '0' },
+	{ title: '将缓存内存和缓冲区<br>计算为可用内存', name: 'f_cafree', type: 'checkbox', value: nvram.t_cafree == '1' },
+	{ title: '在路由器连接中<br>不显示 LAN', name: 'f_hidelr', type: 'checkbox', value: nvram.t_hidelr == '1' },
 	{ title: '控制台日志级别', name: 'console_loglevel', type: 'select', options: a, value: fixInt(nvram.console_loglevel, 1, 8, 1) },
-	{ title: '如果以下进程退出，不重新启动', multi: [
+	{ title: '如果以下进程退出<br>不重新启动', multi: [
 { name: 'f_nr_crond', type: 'checkbox', suffix: ' crond<br>', value: (nvram.debug_norestart.indexOf('crond') != -1) },
 { name: 'f_nr_dnsmasq', type: 'checkbox', suffix: ' dnsmasq<br>', value: (nvram.debug_norestart.indexOf('dnsmasq') != -1) },
 /* LINUX26-BEGIN */
@@ -113,8 +113,8 @@ createFieldTable('', [
 &raquo; <a href='/nvram/nvram.txt?_http_id=<% nv(http_id); %>'>下载 NVRAM 配置</a><br>
 <br>
 <div style='width:80%'>
-<b>警告</b>: NVRAM镜像文本文件可能包含如下信息:如无线加密
-密钥,路由器的用户名/密码,ISP 和 DDNS 信息.请在共享给别人之前
+<b>警告</b>: NVRAM 镜像文本文件可能包含如下信息:如 无线加密
+密钥,路由器的用户名/密码, ISP 和 DDNS 信息. 请在共享给别人之前
 检查并编辑这些文件.<br>
 </div>
 </div>

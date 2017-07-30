@@ -274,7 +274,7 @@ createFieldTable('', [
 		<li><b>启用 torrent 客户端</b> - 注意! - 如果您的路由器只有32MB的RAM, 您需要开启 swap 分区.
 		<li><b>Transmission 程序路径</b> 到包含 transmission-daemon 等程序的路径.
 		<li><b>保持活动</b> - 开启后,系统将在指定时段检查 transmission-daemon 运行状况并在其崩溃后将其重新启动.
-		<li><b>Listening port</b> - torrent 客户端使用的端口.确保此端口不被占用.
+		<li><b>监听端口</b> - torrent 客户端使用的端口.确保此端口不被占用.
 </ul>
 </div>
 <div class='section-title'>远程访问<script>W(btgui_link);</script></div>
@@ -323,11 +323,11 @@ createFieldTable('', [
 createFieldTable('', [
 	{ title: '下载序列', multi: [
 { name: 'f_bt_dl_queue_enable', type: 'checkbox', value: nvram.bt_dl_queue_enable == '1', suffix: '  ' },
-{ name: 'bt_dl_queue_size', type: 'text', maxlen: 5, size: 7, value: nvram.bt_dl_queue_size, suffix: ' <small>(range: 1 - 30; default: 5) *</small>' }
+{ name: 'bt_dl_queue_size', type: 'text', maxlen: 5, size: 7, value: nvram.bt_dl_queue_size, suffix: ' <small>(范围: 1 - 30; 默认: 5) *</small>' }
 ] },
 	{ title: '上传序列', multi: [
 { name: 'f_bt_ul_queue_enable', type: 'checkbox', value: nvram.bt_ul_queue_enable == '1', suffix: '  ' },
-{ name: 'bt_ul_queue_size', type: 'text', maxlen: 5, size: 7, value: nvram.bt_ul_queue_size, suffix: ' <small>(range: 1 - 30; default: 5) *</small>' }
+{ name: 'bt_ul_queue_size', type: 'text', maxlen: 5, size: 7, value: nvram.bt_ul_queue_size, suffix: ' <small>(范围: 1 - 30; 默认: 5) *</small>' }
 ] }
 ]);
 </script>
