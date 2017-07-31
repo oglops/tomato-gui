@@ -476,7 +476,7 @@ createFieldTable('', [
 		{ title: '无线模式', text: wmode },
 		{ title: '无线工作模式', text: bgmo[nvram['wl'+u+'_net_mode']], ignore: (wl_sunit(uidx)>=0) },
 		{ title: '接口状态', rid: 'ifstatus'+uidx, text: wlstats[uidx].ifstatus },
-		{ title: '无线电', rid: 'radio'+uidx, text: (wlstats[uidx].radio == 0) ? '<b>禁用</b>' : '启用', ignore: (wl_sunit(uidx)>=0) },
+		{ title: '无线', rid: 'radio'+uidx, text: (wlstats[uidx].radio == 0) ? '<b>禁用</b>' : '启用', ignore: (wl_sunit(uidx)>=0) },
 /* REMOVE-BEGIN */
 //	{ title: 'SSID', text: (nvram['wl'+u+'_ssid'] + ' <small><i>' + ((nvram['wl'+u+'_mode'] != 'ap') ? '' : ((nvram['wl'+u+'_closed'] == 0) ? '(Broadcast Enabled)' : '(Broadcast Disabled)')) + '</i></small>') },
 /* REMOVE-END */

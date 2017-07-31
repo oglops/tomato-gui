@@ -233,7 +233,7 @@ REMOVE-END */
 	{ title: '删除阈值', indent: 2, name: 'upnp_clean_threshold', type: 'text', maxlen: 4, size: 7,
 		suffix: ' <small>重定向</small>', value: nvram.upnp_clean_threshold },
 	{ title: '安全模式', name: 'f_upnp_secure', type: 'checkbox',
-		suffix: ' <small>(w当启用时，UPnP 客户端只能添加到自己的 IP 的映射)</small>',
+		suffix: ' <small>(当启用时，UPnP 客户端只能添加到自己的 IP 的映射)</small>',
 value: (nvram.upnp_secure == '1') },
 	{ title: '在以下 LAN 端口启用' },
 { title: 'LAN', indent: 2, name: 'f_upnp_lan', type: 'checkbox', value: (nvram.upnp_lan == '1') },

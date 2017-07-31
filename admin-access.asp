@@ -289,7 +289,7 @@ createFieldTable('', [
 	{ title: '远程访问端口', indent: 2, name: 'sshd_rport', type: 'text', maxlen: 5, size: 7, value: nvram.sshd_rport },
 	{ title: '远程转发', name: 'f_sshd_forwarding', type: 'checkbox', value: nvram.sshd_forwarding == 1 },
 	{ title: 'SSH 访问端口', name: 'sshd_port', type: 'text', maxlen: 5, size: 7, value: nvram.sshd_port },
-	{ title: '使用密码登录', name: 'f_sshd_pass', type: 'checkbox', value: nvram.sshd_pass == 1 },
+	{ title: '允许使用密码登录', name: 'f_sshd_pass', type: 'checkbox', value: nvram.sshd_pass == 1 },
 	{ title: '使用认证密钥', name: 'sshd_authkeys', type: 'textarea', value: nvram.sshd_authkeys }
 ]);
 W('<input type="button" value="' + (sdup ? '立即停止' : '立即启动') + ' " onclick="toggle(\'sshd\', sdup)" id="_sshd_button">');

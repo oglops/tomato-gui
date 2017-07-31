@@ -2001,7 +2001,7 @@ value: eval('nvram.wl'+u+'_wpa_psk') },
 		{ title: '共享密钥', indent: 2, name: 'wl'+u+'_radius_key', type: 'password', maxlen: 80, size: 32, peekaboo: 1,
 			suffix: ' <input type="button" id="_f_wl'+u+'_psk_random2" value="随机" onclick="random_psk(\'_wl'+u+'_radius_key\')">',
 value: eval('nvram.wl'+u+'_radius_key') },
-		{ title: '组密钥更新间隔', indent: 2, name: 'wl'+u+'_wpa_gtk_rekey', type: 'text', maxlen: 4, size: 6, suffix: ' <i>(seconds)</i>',
+		{ title: '组密钥更新间隔', indent: 2, name: 'wl'+u+'_wpa_gtk_rekey', type: 'text', maxlen: 4, size: 6, suffix: ' <i>(秒)</i>',
 value: eval('nvram.wl'+u+'_wpa_gtk_rekey') },
 		{ title: 'Radius 服务', indent: 2, multi: [
 { name: 'wl'+u+'_radius_ipaddr', type: 'text', maxlen: 15, size: 17, value: eval('nvram.wl'+u+'_radius_ipaddr') },
