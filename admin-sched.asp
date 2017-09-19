@@ -86,7 +86,7 @@ a = [
 		{ title: '时间', multi: [
 { name: key + 'time', type: 'select', options: t, value: oe ? 'e' : v[2] },
 { name: key + 'every', type: 'text', maxlen: 10, size: 10, value: (v[2] < 0) ? -v[2] : 30,
-				prefix: ' ', suffix: ' <small id="_' + key + '分钟"><i>minutes</i></small>' } ] },
+				prefix: ' ', suffix: ' <small id="_' + key + 'mins"><i>分钟</i></small>' } ] },
 		{ title: '天', multi: [
 			{ name: key + 'sun', type: 'checkbox', suffix: ' 星期日 &nbsp; ', value: w & 1 },
 			{ name: key + 'mon', type: 'checkbox', suffix: ' 星期一 &nbsp; ', value: w & 2 },
