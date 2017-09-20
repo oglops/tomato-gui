@@ -110,7 +110,7 @@ createFieldTable('', [
 	{ title: '所在域', indent: 2, name: 'f_cifs1_dom', type: 'text', maxlen: 32, size: 34, value: a[4] },
 	{ title: '挂载后执行', indent: 2, name: 'f_cifs1_exec', type: 'text', maxlen: 64, size: 34, value: a[5] },
 	{ title: '安全设置', indent: 2, name: 'f_cifs1_sec', type: 'select',
-		options: [['','默认 (NTLM)'],['ntlmi','NTLM 和 数据包签名'],['ntlmv2','NTLMv2'],['ntlmv2i','NTLMv2 'NTLM 和'],['nontlm','No NTLM'],['lanman','LANMAN'],['none','无']],
+		options: [['','默认 (NTLM)'],['ntlmi','NTLM 和 数据包签名'],['ntlmv2','NTLMv2'],['ntlmv2i','NTLMv2 和 数据包签名'],['nontlm','No NTLM'],['lanman','LANMAN'],['none','无']],
 value: a[7] },
 	{ title: '总容量 / 可用空间', indent: 2, text: cifs1.size ? (scaleSize(cifs1.size) + ' / ' + scaleSize(cifs1.free)) : '(未挂载)' },
 null,
