@@ -329,7 +329,7 @@ createFieldTable('', [
 <div class='section'>
 <script type='text/javascript'>
 createFieldTable('', [
-	{ title: '用户名', name: 'http_username', type: 'text', value: nvram.http_username, suffix: '&nbsp;<small>(empty field means "admin")</small>' },
+	{ title: '用户名', name: 'http_username', type: 'text', value: nvram.http_username, suffix: '&nbsp;<small>(空白则用户名为 "admin")</small>' },
 	{ title: '允许网页登陆为"管理员"', name: 'f_http_root', type: 'checkbox', value: nvram.http_root == 1 },
 null,
 	{ title: '密码', name: 'set_password_1', type: 'password', value: '**********' },
