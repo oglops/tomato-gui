@@ -1,10 +1,11 @@
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0//EN'>
 <!--
-Tomato GUI
-Copyright (C) 2006-2010 Jonathan Zarate
-http://www.polarcloud.com/tomato/
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2006-2010 Jonathan Zarate
+	http://www.polarcloud.com/tomato/
+
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <html>
 <head>
@@ -19,6 +20,7 @@ No part of this file may be used without permission.
 
 <script type='text/javascript' src='debug.js'></script>
 <script type='text/javascript' src='bwm-hist.js'></script>
+
 <script type='text/javascript'>
 
 //	<% nvram("wan_ifname,wan2_ifname,wan3_ifname,wan4_ifname,lan_ifname,rstats_enable"); %>
@@ -26,96 +28,108 @@ try {
 //	<% bandwidth("daily"); %>
 }
 catch (ex) {
-daily_history = [];
+	daily_history = [];
 }
 rstats_busy = 0;
 if (typeof(daily_history) == 'undefined') {
-daily_history = [];
-rstats_busy = 1;
+	daily_history = [];
+	rstats_busy = 1;
 }
 
 var weeks = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 var weeksShort = ['日', '一', '二', '三', '四', '五', '六'];
 var startwk = 0;
 var summary = 1;
+
 function save()
 {
-cookie.set('weekly', scale + ',' + startwk + ',' + summary, 31);
+	cookie.set('weekly', scale + ',' + startwk + ',' + summary, 31);
 }
+
 function changeStart(e)
 {
-startwk = e.value * 1;
-redraw();
-save();
+	startwk = e.value * 1;
+	redraw();
+	save();
 }
+
 function changeMode(e)
 {
-summary = e.value * 1;
-redraw();
-save();
+	summary = e.value * 1;
+	redraw();
+	save();
 }
+
 function nth(n)
 {
-n += '';
-switch (n.substr(n.length - 1, 1)) {
-case '1':
-return n + 'st';
-case '2':
-return n + 'nd';
-case '3':
-return n + 'rd';
+	n += '';
+	switch (n.substr(n.length - 1, 1)) {
+	case '1':
+		return n + 'st';
+	case '2':
+		return n + 'nd';
+	case '3':
+		return n + 'rd';
+	}
+	return n + 'th';
 }
-return n + 'th';
-}
+
 function redraw()
 {
-var h;
-var grid;
-var block;
-var rows;
-var dend;
-var dbeg;
-var dl, ul;
-var d, diff, ds;
-var tick, lastSplit;
-var yr, mo, da, wk;
-var gn;
-var swk;
-rows = 0;
-block = [];
-gn = 0;
-w = 0;
-lastSplit = 0;
-ul = dl = 0;
-dend = dbeg = '';
-swk	= startwk - 1;
-if (swk < 0) swk = 6;
-if (summary) {
-grid = '<table class="bwmg" cellspacing="1">';
+	var h;
+	var grid;
+	var block;
+	var rows;
+	var dend;
+	var dbeg;
+	var dl, ul;
+	var d, diff, ds;
+	var tick, lastSplit;
+	var yr, mo, da, wk;
+	var gn;
+	var swk;
+
+	rows = 0;
+	block = [];
+	gn = 0;
+	w = 0;
+	lastSplit = 0;
+	ul = dl = 0;
+	dend = dbeg = '';
+
+	swk	= startwk - 1;
+	if (swk < 0) swk = 6;
+
+	if (summary) {
+		grid = '<table class="bwmg" cellspacing="1">';
 		grid += makeRow('header', '日期', '下载', '上传', '合计');
-}
-else {
-grid = '';
-}
-function flush_block()
-{
+	}
+	else {
+		grid = '';
+	}
+
+	function flush_block()
+	{
 		grid += '<b>' + dbeg + ' 到 ' + dend + '</b>' +
-'<table class="bwmg" cellspacing="1">' +
+				'<table class="bwmg" cellspacing="1">' +
 				makeRow('header', '日期', '下载', '上传', '合计') +
-block.join('') +
+				block.join('') +
 				makeRow('footer', '合计', rescale(dl), rescale(ul), rescale(dl + ul)) +
-'</table><br>';
-}
-for (i = 0; i < daily_history.length; ++i) {
-h = daily_history[i];
-yr = (((h[0] >> 16) & 0xFF) + 1900);
-mo = ((h[0] >>> 8) & 0xFF);
-da = (h[0] & 0xFF);
-d = new Date(yr, mo, da);
-wk = d.getDay();
-tick = d.getTime();
-diff = lastSplit - tick;
-ds = ymdText(yr, mo, da) + ' <small>(' + weeksShort[wk] + ')</small>';
+				'</table><br>';
+	}
+
+	for (i = 0; i < daily_history.length; ++i) {
+		h = daily_history[i];
+		yr = (((h[0] >> 16) & 0xFF) + 1900);
+		mo = ((h[0] >>> 8) & 0xFF);
+		da = (h[0] & 0xFF);
+		d = new Date(yr, mo, da);
+		wk = d.getDay();
+
+		tick = d.getTime();
+		diff = lastSplit - tick;
+
+		ds = ymdText(yr, mo, da) + ' <small>(' + weeksShort[wk] + ')</small>';
 
 /*	REMOVE-BEGIN
 
@@ -145,74 +159,82 @@ ds = ymdText(yr, mo, da) + ' <small>(' + weeksShort[wk] + ')</small>';
 
 	REMOVE-END */
 
-if ((wk == swk) || (diff >= (7 * 86400000)) || (lastSplit == 0)) {
-if (summary) {
-if (i > 0) {
-grid += makeRow(((rows & 1) ? 'odd' : 'even'),
-dend + '<br>' + dbeg, rescale(dl), rescale(ul), rescale(dl + ul));
-++rows;
-++gn;
-}
-}
-else {
-if (rows) {
-flush_block();
-++gn;
-}
-block = [];
-rows = 0;
-}
-dl = ul = 0;
-dend = ds;
-lastSplit = tick;
-}
-dl += h[1];
-ul += h[2];
-if (!summary) {
+		if ((wk == swk) || (diff >= (7 * 86400000)) || (lastSplit == 0)) {
+			if (summary) {
+				if (i > 0) {
+					grid += makeRow(((rows & 1) ? 'odd' : 'even'),
+						dend + '<br>' + dbeg, rescale(dl), rescale(ul), rescale(dl + ul));
+					++rows;
+					++gn;
+				}
+			}
+			else {
+				if (rows) {
+					flush_block();
+					++gn;
+				}
+				block = [];
+				rows = 0;
+			}
+			dl = ul = 0;
+			dend = ds;
+			lastSplit = tick;
+		}
+
+		dl += h[1];
+		ul += h[2];
+		if (!summary) {
 			block.unshift(makeRow(((rows & 1) ? 'odd' : 'even'), weeks[wk] + ' <small>' + (mo + 1) + '-' + da + '</small>', rescale(h[1]), rescale(h[2]), rescale(h[1] + h[2])))
-++rows;
+			++rows;
+		}
+
+		dbeg = ds;
+	}
+
+	if (summary) {
+		if (gn < 9) {
+			grid += makeRow(((rows & 1) ? 'odd' : 'even'),
+				dend + '<br>' + dbeg, rescale(dl), rescale(ul), rescale(dl + ul));
+		}
+		grid += '</table>';
+	}
+	else {
+		if ((rows) && (gn < 9)) {
+			flush_block();
+		}
+	}
+	E('bwm-weekly-grid').innerHTML = grid;
 }
-dbeg = ds;
-}
-if (summary) {
-if (gn < 9) {
-grid += makeRow(((rows & 1) ? 'odd' : 'even'),
-dend + '<br>' + dbeg, rescale(dl), rescale(ul), rescale(dl + ul));
-}
-grid += '</table>';
-}
-else {
-if ((rows) && (gn < 9)) {
-flush_block();
-}
-}
-E('bwm-weekly-grid').innerHTML = grid;
-}
+
 function init()
 {
-var s;
-if (nvram.rstats_enable != '1') {
-E('refresh-button').disabled = 1;
-return;
-}
-if ((s = cookie.get('weekly')) != null) {
-if (s.match(/^([0-2]),([0-6]),([0-1])$/)) {
-E('scale').value = scale = RegExp.$1 * 1;
-E('startwk').value = startwk = RegExp.$2 * 1
-E('shmode').value = summary = RegExp.$3 * 1;
-}
-}
-initDate('ymd');
-daily_history.sort(cmpHist);
-redraw();
+	var s;
+
+	if (nvram.rstats_enable != '1') {
+		E('refresh-button').disabled = 1;
+		return;
+	}
+
+	if ((s = cookie.get('weekly')) != null) {
+		if (s.match(/^([0-2]),([0-6]),([0-1])$/)) {
+			E('scale').value = scale = RegExp.$1 * 1;
+			E('startwk').value = startwk = RegExp.$2 * 1
+			E('shmode').value = summary = RegExp.$3 * 1;
+		}
+	}
+
+	initDate('ymd');
+	daily_history.sort(cmpHist);
+	redraw();
 }
 </script>
+
 </head>
 <body onload='init()'>
 <form>
 <table id='container' cellspacing=0>
 <tr><td colspan=2 id='header'>
-<div class='title'>Tomato</div>
+	<div class='title'>Tomato</div>
 	<div class='version'>Version <% version(); %></div>
 </td></tr>
 <tr id='body'><td id='navi'><script type='text/javascript'>navi()</script></td>
@@ -233,6 +255,7 @@ redraw();
 <br><br><br>
 </div>
 <br>
+
 <script type='text/javascript'>checkRstats();</script>
 
 <!-- / / / -->

@@ -1,10 +1,11 @@
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0//EN'>
 <!--
-Tomato GUI
-Copyright (C) 2006-2010 Jonathan Zarate
-http://www.polarcloud.com/tomato/
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2006-2010 Jonathan Zarate
+	http://www.polarcloud.com/tomato/
+
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <html>
 <head>
@@ -19,39 +20,42 @@ No part of this file may be used without permission.
 
 <style type='text/css'>
 #tp-grid .co1 {
-text-align: right;
-width: 30px;
+	text-align: right;
+	width: 30px;
 }
 #tp-grid .co2 {
-width: 440px;
+	width: 440px;
 }
 #tp-grid .co3, #tp-grid .co4, #tp-grid .co5, #tp-grid .co6 {
-text-align: right;
-width: 70px;
+	text-align: right;
+	width: 70px;
 }
 #tp-grid .header .co1 {
-text-align: left;
+	text-align: left;
 }
 </style>
 
 <script type='text/javascript' src='debug.js'></script>
 
 <script type='text/javascript'>
+
 //	<% nvram(''); %>	// http_id
+
 var pingdata = '';
+
 var pg = new TomatoGrid();
 pg.setup = function() {
-this.init('tp-grid');
+	this.init('tp-grid');
 	this.headerSet(['序号', '地址', '接收字节', '生存期限TTL', '响应时间RTT(ms)', '＋/－(ms)']);
 }
 pg.populate = function()
 {
-var buf = pingdata.split('\n');
-var i;
-var r, s, t;
-var last = -1;
-var resolv = [];
-var stats = '';
+	var buf = pingdata.split('\n');
+	var i;
+	var r, s, t;
+	var last = -1;
+	var resolv = [];
+	var stats = '';
 
 /* REMOVE-BEGIN
 1.9
@@ -80,96 +84,113 @@ PING 192.168.5.5 (192.168.1.5): 56 data bytes
 round-trip min/avg/max = 0.7/0.8/1.2 ms
 REMOVE-END */
 
-this.removeAllData();
-for (i = 0; i < buf.length; ++i) {
-if (r = buf[i].match(/^(\d+) bytes from (.+): .*seq=(\d+) ttl=(\d+) time=(\d+\.\d+) ms/)) {
-r.splice(0, 1);
-t = r[0];
-r[0] = r[2];
-r[2] = t;
-if (resolv[r[1]]) r[1] = resolv[r[1]] + ' (' + r[1] + ')';
-r[4] *= 1;
-r[5] = (last > 0) ? (r[4] - last).toFixed(2) : '';
-r[4] = r[4].toFixed(2);
-this.insertData(-1, r)
-last = r[4];
-}
-else if (buf[i].match(/^PING (.+) \((.+)\)/)) {
-resolv[RegExp.$2] = RegExp.$1;
-}
-else if (buf[i].match(/^(\d+) packets.+, (\d+) packets.+, (\d+%)/)) {
+	this.removeAllData();
+	for (i = 0; i < buf.length; ++i) {
+		if (r = buf[i].match(/^(\d+) bytes from (.+): .*seq=(\d+) ttl=(\d+) time=(\d+\.\d+) ms/)) {
+			r.splice(0, 1);
+			t = r[0];
+			r[0] = r[2];
+			r[2] = t;
+			if (resolv[r[1]]) r[1] = resolv[r[1]] + ' (' + r[1] + ')';
+			r[4] *= 1;
+			r[5] = (last > 0) ? (r[4] - last).toFixed(2) : '';
+			r[4] = r[4].toFixed(2);
+			this.insertData(-1, r)
+			last = r[4];
+		}
+		else if (buf[i].match(/^PING (.+) \((.+)\)/)) {
+			resolv[RegExp.$2] = RegExp.$1;
+		}
+		else if (buf[i].match(/^(\d+) packets.+, (\d+) packets.+, (\d+%)/)) {
 			stats = '   封包丢失率: ' + RegExp.$1 + ' 发送, ' + RegExp.$2 + ' 接收, ' + RegExp.$3 + ' 丢失率<br>';
-}
-else if (buf[i].match(/^round.+ (\d+\.\d+)\/(\d+\.\d+)\/(\d+\.\d+)/)) {
+		}
+		else if (buf[i].match(/^round.+ (\d+\.\d+)\/(\d+\.\d+)\/(\d+\.\d+)/)) {
 			stats = '平均变化量: ' + RegExp.$1 + ' 最小, ' + RegExp.$2 + ' 平均, ' + RegExp.$3 + ' 最大 (ms)<br>' + stats;
+		}
+	}
+
+	E('stats').innerHTML = stats;
+	E('debug').value = pingdata;
+	pingdata = '';
+	spin(0);
 }
-}
-E('stats').innerHTML = stats;
-E('debug').value = pingdata;
-pingdata = '';
-spin(0);
-}
+
 function verifyFields(focused, quiet)
 {
-var s;
-var e;
-e = E('_f_addr');
-s = e.value.trim();
-if (!s.match(/^[\w\-\.\:]+$/)) {
-ferror.set(e, 'Invalid hostname/address', quiet);
-return 0;
+	var s;
+	var e;
+
+	e = E('_f_addr');
+	s = e.value.trim();
+	if (!s.match(/^[\w\-\.\:]+$/)) {
+		ferror.set(e, 'Invalid hostname/address', quiet);
+		return 0;
+	}
+	ferror.clear(e);
+
+	return v_range('_f_count', quiet, 1, 50) && v_range('_f_size', quiet, 1, 10240);
 }
-ferror.clear(e);
-return v_range('_f_count', quiet, 1, 50) && v_range('_f_size', quiet, 1, 10240);
-}
+
+
 var pinger = null;
+
 function spin(x)
 {
-E('pingb').disabled = x;
-E('_f_addr').disabled = x;
-E('_f_count').disabled = x;
-E('_f_size').disabled = x;
-E('wait').style.visibility = x ? 'visible' : 'hidden';
-if (!x) pinger = null;
+	E('pingb').disabled = x;
+	E('_f_addr').disabled = x;
+	E('_f_count').disabled = x;
+	E('_f_size').disabled = x;
+	E('wait').style.visibility = x ? 'visible' : 'hidden';
+	if (!x) pinger = null;
 }
+
 function ping()
 {
-// Opera 8 sometimes sends 2 clicks
-if (pinger) return;
-if (!verifyFields(null, 0)) return;
-spin(1);
-pinger = new XmlHttp();
-pinger.onCompleted = function(text, xml) {
-eval(text);
-pg.populate();
-}
-pinger.onError = function(x) {
+	// Opera 8 sometimes sends 2 clicks
+	if (pinger) return;
+
+	if (!verifyFields(null, 0)) return;
+
+	spin(1);
+
+	pinger = new XmlHttp();
+	pinger.onCompleted = function(text, xml) {
+		eval(text);
+		pg.populate();
+	}
+	pinger.onError = function(x) {
 		alert('错误: ' + x);
-spin(0);
+		spin(0);
+	}
+
+	var addr = E('_f_addr').value;
+	var count = E('_f_count').value;
+	var size = E('_f_size').value;
+	pinger.post('ping.cgi', 'addr=' + addr + '&count=' + count + '&size=' + size);
+
+	cookie.set('pingaddr', addr);
+	cookie.set('pingcount', count);
+	cookie.set('pingsize', size);
 }
-var addr = E('_f_addr').value;
-var count = E('_f_count').value;
-var size = E('_f_size').value;
-pinger.post('ping.cgi', 'addr=' + addr + '&count=' + count + '&size=' + size);
-cookie.set('pingaddr', addr);
-cookie.set('pingcount', count);
-cookie.set('pingsize', size);
-}
+
 function init()
 {
-var s;
-if ((s = cookie.get('pingaddr')) != null) E('_f_addr').value = s;
-if ((s = cookie.get('pingcount')) != null) E('_f_count').value = s;
-if ((s = cookie.get('pingsize')) != null) E('_f_size').value = s;
-E('_f_addr').onkeypress = function(ev) { if (checkEvent(ev).keyCode == 13) ping(); }
+	var s;
+
+	if ((s = cookie.get('pingaddr')) != null) E('_f_addr').value = s;
+	if ((s = cookie.get('pingcount')) != null) E('_f_count').value = s;
+	if ((s = cookie.get('pingsize')) != null) E('_f_size').value = s;
+
+	E('_f_addr').onkeypress = function(ev) { if (checkEvent(ev).keyCode == 13) ping(); }
 }
 </script>
+
 </head>
 <body onload='init()'>
 <form action='javascript:{}'>
 <table id='container' cellspacing=0>
 <tr><td colspan=2 id='header'>
-<div class='title'>Tomato</div>
+	<div class='title'>Tomato</div>
 	<div class='version'>Version <% version(); %></div>
 </td></tr>
 <tr id='body'><td id='navi'><script type='text/javascript'>navi()</script></td>
@@ -183,7 +204,7 @@ E('_f_addr').onkeypress = function(ev) { if (checkEvent(ev).keyCode == 13) ping(
 <script type='text/javascript'>
 createFieldTable('', [
 	{ title: '地址', name: 'f_addr', type: 'text', maxlen: 64, size: 32, value: '',
-suffix: ' <input type="button" value="Ping" onclick="ping()" id="pingb">' },
+		suffix: ' <input type="button" value="Ping" onclick="ping()" id="pingb">' },
 	{ title: 'Ping 次数', name: 'f_count', type: 'text', maxlen: 2, size: 7, value: '5' },
 	{ title: '包大小', name: 'f_size', type: 'text', maxlen: 5, size: 7, value: '56', suffix: ' <small>(字节)</small>' }
 ]);
@@ -194,6 +215,7 @@ suffix: ' <input type="button" value="Ping" onclick="ping()" id="pingb">' },
 
 <table id='tp-grid' class='tomato-grid' cellspacing=1></table>
 <pre id='stats'></pre>
+
 <div style='height:10px;' onclick='javascript:E("debug").style.display=""'></div>
 <textarea id='debug' style='width:99%;height:300px;display:none'></textarea>
 

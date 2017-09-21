@@ -1,10 +1,11 @@
 <html>
 <!--
-Tomato GUI
-Copyright (C) 2006-2010 Jonathan Zarate
-http://www.polarcloud.com/tomato/
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2006-2010 Jonathan Zarate
+	http://www.polarcloud.com/tomato/
+
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <head>
 <meta http-equiv='content-type' content='text/html;charset=utf-8'>
@@ -14,14 +15,14 @@ No part of this file may be used without permission.
 function tick()
 {
 	t.innerHTML = tock + ' 秒' + ((tock == 1) ? '' : 's');
-if (--tock >= 0) setTimeout(tick, 1000);
-else history.go(-1);
+	if (--tock >= 0) setTimeout(tick, 1000);
+		else history.go(-1);
 }
 function init()
 {
-t = document.getElementById('time');
-tock = 15;
-tick();
+	t = document.getElementById('time');
+	tock = 15;
+	tick();
 }
 </script></head>
 <body onload='init()' style='background-color:#fff' onclick='go()'>

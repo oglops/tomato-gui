@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0//EN'>
 <!--
-Tomato GUI
-Copyright (C) 2012 Shibby
-http://openlinksys.info
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2012 Shibby
+	http://openlinksys.info
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <html>
 <head>
@@ -21,25 +21,32 @@ var anon_link = '&nbsp;&nbsp;<a href="http://anon.groov.pl/index.php?search=9&ro
 
 function verifyFields(focused, quiet)
 {
-var o = (E('_tomatoanon_answer').value == '1');
-var s = (E('_tomatoanon_enable').value == '1');
-E('_tomatoanon_enable').disabled = !o;
-E('_f_tomatoanon_notify').disabled = !o || !s;
-return 1;
+	var o = (E('_tomatoanon_answer').value == '1');
+	var s = (E('_tomatoanon_enable').value == '1');
+
+	E('_tomatoanon_enable').disabled = !o;
+	E('_f_tomatoanon_notify').disabled = !o || !s;
+
+	return 1;
 }
+
 function save()
 {
-if (verifyFields(null, 0)==0) return;
-var fom = E('_fom');
-fom.tomatoanon_notify.value = E('_f_tomatoanon_notify').checked ? 1 : 0;
-fom._service.value = 'tomatoanon-restart';
-form.submit('_fom', 1);
+	if (verifyFields(null, 0)==0) return;
+	var fom = E('_fom');
+
+	fom.tomatoanon_notify.value = E('_f_tomatoanon_notify').checked ? 1 : 0;
+
+	fom._service.value = 'tomatoanon-restart';
+	form.submit('_fom', 1);
 }
+
 function init()
 {
 }
 </script>
 </head>
+
 <body onLoad="init()">
 <table id='container' cellspacing=0>
 <tr><td colspan=2 id='header'>
@@ -109,11 +116,11 @@ createFieldTable('', [
 <div></div>
 </td></tr>
 <tr><td id='footer' colspan=2>
-<form>
-<span id='footer-msg'></span>
+ <form>
+ <span id='footer-msg'></span>
  <input type='button' value='保存设置' id='save-button' onclick='save()'>
  <input type='button' value='取消设置' id='cancel-button' onclick='javascript:reloadPage();'>
-</form>
+ </form>
 <div></div>
 </td></tr>
 </table>

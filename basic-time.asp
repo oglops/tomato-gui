@@ -1,10 +1,11 @@
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0//EN'>
 <!--
-Tomato GUI
-Copyright (C) 2006-2010 Jonathan Zarate
-http://www.polarcloud.com/tomato/
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2006-2010 Jonathan Zarate
+	http://www.polarcloud.com/tomato/
+
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <html>
 <head>
@@ -20,7 +21,10 @@ No part of this file may be used without permission.
 <script type='text/javascript' src='debug.js'></script>
 
 <script type='text/javascript'>
+
 //	<% nvram("tm_sel,tm_dst,tm_tz,ntp_updates,ntp_server,ntp_tdod,ntp_kiss"); %>
+
+
 var ntpList = [
 	['custom', '自定义...'],
 	['', '默认'],
@@ -32,92 +36,106 @@ var ntpList = [
 	['south-america', '南美洲'],
 	['us', '美国']
 ];
+
 function ntpString(name)
 {
-if (name == '') name = 'pool.ntp.org';
-else name = name + '.pool.ntp.org';
-return '0.' + name + ' 1.' + name + ' 2.' + name;
+	if (name == '') name = 'pool.ntp.org';
+		else name = name + '.pool.ntp.org';
+	return '0.' + name + ' 1.' + name + ' 2.' + name;
 }
+
 function verifyFields(focused, quiet)
 {
-var ok = 1;
-var s = E('_tm_sel').value;
-var f_dst = E('_f_tm_dst');
-var f_tz = E('_f_tm_tz');
-if (s == 'custom') {
-f_dst.disabled = true;
-f_tz.disabled = false;
-PR(f_dst).style.display = 'none';
-PR(f_tz).style.display = '';
-}
-else {
-f_tz.disabled = true;
-PR(f_tz).style.display = 'none';
-PR(f_dst).style.display = '';
-if (s.match(/^([A-Z]+[\d:-]+)[A-Z]+/)) {
-if (!f_dst.checked) s = RegExp.$1;
-f_dst.disabled = false;
-}
-else {
-f_dst.disabled = true;
-}
-f_tz.value = s;
-}
-var a = 1;
-var b = 1;
-switch (E('_ntp_updates').value * 1) {
-case -1:
-b = 0;
-case 0:
-a = 0;
-break;
-}
-elem.display(PR('_f_ntp_tdod'), a);
-elem.display(PR('_f_ntp_server'), b);
-a = (E('_f_ntp_server').value == 'custom');
-elem.display(PR('_f_ntp_1'), PR('_f_ntp_2'), PR('_f_ntp_3'), a && b);
-elem.display(PR('ntp-preset'), !a && b);
-if (a) {
-if ((E('_f_ntp_1').value == '') && (E('_f_ntp_2').value == '') && ((E('_f_ntp_3').value == ''))) {
+	var ok = 1;
+
+	var s = E('_tm_sel').value;
+	var f_dst = E('_f_tm_dst');
+	var f_tz = E('_f_tm_tz');
+	if (s == 'custom') {
+		f_dst.disabled = true;
+		f_tz.disabled = false;
+		PR(f_dst).style.display = 'none';
+		PR(f_tz).style.display = '';
+	}
+	else {
+		f_tz.disabled = true;
+		PR(f_tz).style.display = 'none';
+		PR(f_dst).style.display = '';
+		if (s.match(/^([A-Z]+[\d:-]+)[A-Z]+/)) {
+			if (!f_dst.checked) s = RegExp.$1;
+			f_dst.disabled = false;
+		}
+		else {
+			f_dst.disabled = true;
+		}
+		f_tz.value = s;
+	}
+
+	var a = 1;
+	var b = 1;
+	switch (E('_ntp_updates').value * 1) {
+	case -1:
+		b = 0;
+	case 0:
+		a = 0;
+		break;
+	}
+	elem.display(PR('_f_ntp_tdod'), a);
+
+	elem.display(PR('_f_ntp_server'), b);
+	a = (E('_f_ntp_server').value == 'custom');
+	elem.display(PR('_f_ntp_1'), PR('_f_ntp_2'), PR('_f_ntp_3'), a && b);
+
+	elem.display(PR('ntp-preset'), !a && b);
+
+	if (a) {
+		if ((E('_f_ntp_1').value == '') && (E('_f_ntp_2').value == '') && ((E('_f_ntp_3').value == ''))) {
 			ferror.set('_f_ntp_1', '至少需要指定一个 NTP 时间服务器', quiet);
-return 0;
+			return 0;
+		}
+	}
+	else {
+		E('ntp-preset').innerHTML = ntpString(E('_f_ntp_server').value).replace(/\s+/, ', ');
+	}
+
+	ferror.clear('_f_ntp_1');
+	return 1;
 }
-}
-else {
-E('ntp-preset').innerHTML = ntpString(E('_f_ntp_server').value).replace(/\s+/, ', ');
-}
-ferror.clear('_f_ntp_1');
-return 1;
-}
+
 function save(clearKiss)
 {
-if (!verifyFields(null, 0)) return;
-var fom, a, i;
-fom = E('_fom');
-fom.tm_dst.value = fom.f_tm_dst.checked ? 1 : 0;
-fom.tm_tz.value = fom.f_tm_tz.value;
-if (E('_f_ntp_server').value != 'custom') {
-fom.ntp_server.value = ntpString(E('_f_ntp_server').value);
+	if (!verifyFields(null, 0)) return;
+
+	var fom, a, i;
+
+	fom = E('_fom');
+	fom.tm_dst.value = fom.f_tm_dst.checked ? 1 : 0;
+	fom.tm_tz.value = fom.f_tm_tz.value;
+
+	if (E('_f_ntp_server').value != 'custom') {
+		fom.ntp_server.value = ntpString(E('_f_ntp_server').value);
+	}
+	else {
+		a = [fom.f_ntp_1.value, fom.f_ntp_2.value, fom.f_ntp_3.value];
+		for (i = 0; i < a.length; ) {
+			if (a[i] == '') a.splice(i, 1);
+				else ++i;
+		}
+		fom.ntp_server.value = a.join(' ');
+	}
+
+	fom.ntp_tdod.value = fom.f_ntp_tdod.checked ? 1 : 0;
+	fom.ntp_kiss.disabled = !clearKiss;
+	form.submit(fom);
 }
-else {
-a = [fom.f_ntp_1.value, fom.f_ntp_2.value, fom.f_ntp_3.value];
-for (i = 0; i < a.length; ) {
-if (a[i] == '') a.splice(i, 1);
-else ++i;
-}
-fom.ntp_server.value = a.join(' ');
-}
-fom.ntp_tdod.value = fom.f_ntp_tdod.checked ? 1 : 0;
-fom.ntp_kiss.disabled = !clearKiss;
-form.submit(fom);
-}
+
 function earlyInit()
 {
-if (nvram.ntp_kiss != '') {
-E('ntpkiss-ip').innerHTML = nvram.ntp_kiss;
-E('ntpkiss').style.display = '';
-}
-verifyFields(null, 1);
+	if (nvram.ntp_kiss != '') {
+		E('ntpkiss-ip').innerHTML = nvram.ntp_kiss;
+		E('ntpkiss').style.display = '';
+	}
+	verifyFields(null, 1);
 }
 </script>
 </head>
@@ -125,7 +143,7 @@ verifyFields(null, 1);
 <form id='_fom' method='post' action='tomato.cgi'>
 <table id='container' cellspacing=0>
 <tr><td colspan=2 id='header'>
-<div class='title'>Tomato</div>
+	<div class='title'>Tomato</div>
 	<div class='version'>Version <% version(); %></div>
 </td></tr>
 <tr id='body'><td id='navi'><script type='text/javascript'>navi()</script></td>
@@ -138,6 +156,7 @@ verifyFields(null, 1);
 <input type='hidden' name='_nextwait' value='5'>
 <input type='hidden' name='_service' value='ntpc-restart'>
 <input type='hidden' name='_sleep' value='3'>
+
 <input type='hidden' name='tm_dst'>
 <input type='hidden' name='tm_tz'>
 <input type='hidden' name='ntp_server'>
@@ -148,10 +167,12 @@ verifyFields(null, 1);
 <div class='section-title'>系统时间</div>
 <div class='section'>
 <script type='text/javascript'>
+
 ntp = nvram.ntp_server.split(/\s+/);
+
 ntpSel = 'custom';
 for (i = ntpList.length - 1; i > 0; --i) {
-if (ntpString(ntpList[i][0]) == nvram.ntp_server) ntpSel = ntpList[i][0];
+	if (ntpString(ntpList[i][0]) == nvram.ntp_server) ntpSel = ntpList[i][0];
 }
 
 /* REMOVE-BEGIN
@@ -182,7 +203,7 @@ REMOVE-END */
 
 createFieldTable('', [
 	{ title: '现在时间', text: '<span id="clock"><% time(); %></span>' },
-null,
+	null,
 	{ title: '时区', name: 'tm_sel', type: 'select', options: [
 		['custom','自定义时区...'],
 		['UTC12','UTC-12:00 太平洋/夸贾林岛'],
@@ -216,7 +237,7 @@ null,
 		['STD-2DST,M3.5.0/2,M10.5.0/2','UTC+02:00 希腊, 乌克兰, 罗马尼亚, 土耳其, 拉脱维亚'],
 		['UTC-3','UTC+03:00 伊拉克,约旦,科威特'],
 		['MSK-3MSD,M3.5.0,M10.5.0/3','UTC+03:00 莫斯科'],
-['UTC-4','UTC+04:00 阿曼，阿联酋'],
+		['UTC-4','UTC+04:00 阿曼，阿联酋'],
 		['AMT-4AMST,M3.5.0,M10.5.0/3','UTC+04:00 亚美尼亚'],
 		['UTC-4:30','UTC+04:30 喀布尔'],
 		['UTC-5','UTC+05:00 巴基斯坦'],
@@ -238,22 +259,23 @@ null,
 		['UTC-11','UTC+11:00 所罗门群岛'],
 		['UTC-12','UTC+12:00 斐济'],
 		['NZST-12NZDT,M9.5.0/2,M4.1.0/3','UTC+12:00 纽西兰']
-], value: nvram.tm_sel },
+	], value: nvram.tm_sel },
 	{ title: '自动夏时制时间', indent: 2, name: 'f_tm_dst', type: 'checkbox', value: nvram.tm_dst != '0' },
 	{ title: '自定义时区标识', indent: 2, name: 'f_tm_tz', type: 'text', maxlen: 32, size: 34, value: nvram.tm_tz || '' },
-null,
+	null,
 	{ title: '自动同步时间', name: 'ntp_updates', type: 'select', options: [[-1,'不同步'],[0,'启动时更新'],[1,'1 小时'],[2,'2 小时'],[4,'4 小时'],[6,'6 小时'],[8,'8 小时'],[12,'12 小时'],[24,'24 小时']],
-value: nvram.ntp_updates },
+		value: nvram.ntp_updates },
 	{ title: '需要时同步', indent: 2, name: 'f_ntp_tdod', type: 'checkbox', value: nvram.ntp_tdod != '0' },
 	{ title: 'NTP 时间服务器', name: 'f_ntp_server', type: 'select', options: ntpList, value: ntpSel },
-{ title: '&nbsp;', text: '<small><span id="ntp-preset">xx</span></small>', hidden: 1 },
-{ title: '', name: 'f_ntp_1', type: 'text', maxlen: 48, size: 50, value: ntp[0] || 'pool.ntp.org', hidden: 1 },
-{ title: '', name: 'f_ntp_2', type: 'text', maxlen: 48, size: 50, value: ntp[1] || '', hidden: 1 },
-{ title: '', name: 'f_ntp_3', type: 'text', maxlen: 48, size: 50, value: ntp[2] || '', hidden: 1 }
+	{ title: '&nbsp;', text: '<small><span id="ntp-preset">xx</span></small>', hidden: 1 },
+	{ title: '', name: 'f_ntp_1', type: 'text', maxlen: 48, size: 50, value: ntp[0] || 'pool.ntp.org', hidden: 1 },
+	{ title: '', name: 'f_ntp_2', type: 'text', maxlen: 48, size: 50, value: ntp[1] || '', hidden: 1 },
+	{ title: '', name: 'f_ntp_3', type: 'text', maxlen: 48, size: 50, value: ntp[2] || '', hidden: 1 }
 ]);
 </script>
 </div>
 <br><br>
+
 <div id='ntpkiss' style='display:none'>
 下列的 NTP 服务器已被服务器自动封锁:
 <b id='ntpkiss-ip'></b>
@@ -266,7 +288,7 @@ value: nvram.ntp_updates },
 
 </td></tr>
 <tr><td id='footer' colspan=2>
-<span id='footer-msg'></span>
+	<span id='footer-msg'></span>
 	<input type='button' value='保存设置' id='save-button' onclick='save(0)'>
 	<input type='button' value='取消设置' id='cancel-button' onclick='reloadPage();'>
 </td></tr>

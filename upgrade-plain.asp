@@ -9,6 +9,7 @@
 <br>
 <form name="firmware_upgrade" method="post" action="upgrade.cgi?<% nv(http_id) %>" encType="multipart/form-data">
 <input type="hidden" name="submit_button" value="升级">
+
 固件: <input type="file" name="file"> <input type="submit" value="升级">
 </form>
 </body></html>

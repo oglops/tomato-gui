@@ -1,12 +1,14 @@
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0//EN'>
 <!--
-Tomato GUI
-Copyright (C) 2006-2008 Jonathan Zarate
-http://www.polarcloud.com/tomato/
-Copyright (C) 2011 Ofer Chen (Roadkill), Vicente Soriano (Victek)
-Adapted & Modified from Dual WAN Tomato Firmware.
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2006-2008 Jonathan Zarate
+	http://www.polarcloud.com/tomato/
+
+	Copyright (C) 2011 Ofer Chen (Roadkill), Vicente Soriano (Victek)
+	Adapted & Modified from Dual WAN Tomato Firmware.
+
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <html>
 <head>
@@ -18,100 +20,113 @@ No part of this file may be used without permission.
 <script type='text/javascript' src='tomato.js'></script>
 <style type='text/css'>
 textarea {
-width: 98%;
-height: 15em;
+ width: 98%;
+ height: 15em;
 }
 </style>
 <script type='text/javascript'>
 //	<% nvram("NC_enable,NC_Verbosity,NC_GatewayName,NC_GatewayPort,NC_ForcedRedirect,NC_HomePage,NC_DocumentRoot,NC_LoginTimeout,NC_IdleTimeout,NC_MaxMissedARP,NC_ExcludePorts,NC_IncludePorts,NC_AllowedWebHosts,NC_MACWhiteList,NC_BridgeLAN,lan_ifname,lan1_ifname,lan2_ifname,lan3_ifname"); %>
 function fix(name)
 {
-var i;
-if (((i = name.lastIndexOf('/')) > 0) || ((i = name.lastIndexOf('\\')) > 0))
-name = name.substring(i + 1, name.length);
-return name;
+ var i;
+ if (((i = name.lastIndexOf('/')) > 0) || ((i = name.lastIndexOf('\\')) > 0))
+ name = name.substring(i + 1, name.length);
+ return name;
 }
+
 function uploadButton()
 {
-var fom;
-var name;
-var i;
-name = fix(E('upload-name').value);
-name = name.toLowerCase();
-if ((name.length <= 5) || (name.substring(name.length - 5, name.length).toLowerCase() != '.html')) {
+ var fom;
+ var name;
+ var i;
+ name = fix(E('upload-name').value);
+ name = name.toLowerCase();
+ if ((name.length <= 5) || (name.substring(name.length - 5, name.length).toLowerCase() != '.html')) {
  alert('文件名错误, 正确的扩展名是 ".html".');
-return;
+ return;
+ }
+ if (!confirm('你确定要上传文件' + name + '到路由器吗?')) return;
+ E('upload-button').disabled = 1;
+ fields.disableAll(E('config-section'), 1);
+ fields.disableAll(E('footer'), 1);
+ E('upload-form').submit();
 }
-if (!confirm('你确定要上传文件' + name + '到路由器吗?')) return;
-E('upload-button').disabled = 1;
-fields.disableAll(E('config-section'), 1);
-fields.disableAll(E('footer'), 1);
-E('upload-form').submit();
-}
+
 function verifyFields(focused, quiet)
 {
-var a = E('_f_NC_enable').checked;
-E('_NC_Verbosity').disabled = !a;
-E('_NC_GatewayName').disabled = !a;
-E('_NC_GatewayPort').disabled = !a;
-E('_f_NC_ForcedRedirect').disabled = !a;
-E('_NC_HomePage').disabled = !a;
-E('_NC_DocumentRoot').disabled = !a;
-E('_NC_LoginTimeout').disabled = !a;
-E('_NC_IdleTimeout').disabled = !a;
-E('_NC_MaxMissedARP').disabled = !a;
-E('_NC_ExcludePorts').disabled = !a;
-E('_NC_IncludePorts').disabled = !a;
-E('_NC_AllowedWebHosts').disabled = !a;
-E('_NC_MACWhiteList').disabled = !a;
-E('_NC_BridgeLAN').disabled = !a;
-var bridge = E('_NC_BridgeLAN');
-if(nvram.lan_ifname.length < 1)
-bridge.options[0].disabled=true;
-if(nvram.lan1_ifname.length < 1)
-bridge.options[1].disabled=true;
-if(nvram.lan2_ifname.length < 1)
-bridge.options[2].disabled=true;
-if(nvram.lan3_ifname.length < 1)
-bridge.options[3].disabled=true;
-if ( (E('_f_NC_ForcedRedirect').checked) && (!v_length('_NC_HomePage', quiet, 1, 255))) return 0;
-if (!v_length('_NC_GatewayName', quiet, 1, 255)) return 0;	
-if ( (E('_NC_IdleTimeout').value != '0') && (!v_range('_NC_IdleTimeout', quiet, 300))) return 0;
-return 1;
+	var a = E('_f_NC_enable').checked;
+
+	E('_NC_Verbosity').disabled = !a;
+	E('_NC_GatewayName').disabled = !a;
+	E('_NC_GatewayPort').disabled = !a;
+	E('_f_NC_ForcedRedirect').disabled = !a;
+	E('_NC_HomePage').disabled = !a;
+	E('_NC_DocumentRoot').disabled = !a;
+	E('_NC_LoginTimeout').disabled = !a;
+	E('_NC_IdleTimeout').disabled = !a;
+	E('_NC_MaxMissedARP').disabled = !a;
+	E('_NC_ExcludePorts').disabled = !a;
+	E('_NC_IncludePorts').disabled = !a;
+	E('_NC_AllowedWebHosts').disabled = !a;
+	E('_NC_MACWhiteList').disabled = !a;
+	E('_NC_BridgeLAN').disabled = !a;
+
+	var bridge = E('_NC_BridgeLAN');
+	if(nvram.lan_ifname.length < 1)
+		bridge.options[0].disabled=true;
+	if(nvram.lan1_ifname.length < 1)
+		bridge.options[1].disabled=true;
+	if(nvram.lan2_ifname.length < 1)
+		bridge.options[2].disabled=true;
+	if(nvram.lan3_ifname.length < 1)
+		bridge.options[3].disabled=true;
+
+	if ( (E('_f_NC_ForcedRedirect').checked) && (!v_length('_NC_HomePage', quiet, 1, 255))) return 0;
+	if (!v_length('_NC_GatewayName', quiet, 1, 255)) return 0;	
+	if ( (E('_NC_IdleTimeout').value != '0') && (!v_range('_NC_IdleTimeout', quiet, 300))) return 0;
+	return 1;
 }
+
 function save()
 {
-if (verifyFields(null, 0)==0) return;
-var fom = E('_fom');
-fom.NC_enable.value = E('_f_NC_enable').checked ? 1 : 0;
-fom.NC_ForcedRedirect.value = E('_f_NC_ForcedRedirect').checked ? 1 : 0;
-// blank spaces with commas
-e = E('_NC_ExcludePorts');
-e.value = e.value.replace(/\,+/g, ' ');
-e = E('_NC_IncludePorts');
-e.value = e.value.replace(/\,+/g, ' ');
-e = E('_NC_AllowedWebHosts');
-e.value = e.value.replace(/\,+/g, ' ');
-e = E('_NC_MACWhiteList');
-e.value = e.value.replace(/\,+/g, ' ');
-fields.disableAll(E('upload-section'), 1);
-if (fom.NC_enable.value == 0) {
-fom._service.value = 'splashd-stop';
+  if (verifyFields(null, 0)==0) return;
+  var fom = E('_fom');
+  fom.NC_enable.value = E('_f_NC_enable').checked ? 1 : 0;
+  fom.NC_ForcedRedirect.value = E('_f_NC_ForcedRedirect').checked ? 1 : 0;
+
+  // blank spaces with commas
+  e = E('_NC_ExcludePorts');
+  e.value = e.value.replace(/\,+/g, ' ');
+
+  e = E('_NC_IncludePorts');
+  e.value = e.value.replace(/\,+/g, ' ');
+
+  e = E('_NC_AllowedWebHosts');
+  e.value = e.value.replace(/\,+/g, ' ');
+  
+  e = E('_NC_MACWhiteList');
+  e.value = e.value.replace(/\,+/g, ' ');
+
+  fields.disableAll(E('upload-section'), 1);
+  if (fom.NC_enable.value == 0) {
+	fom._service.value = 'splashd-stop';
+  }
+	else {
+	fom._service.value = 'splashd-restart';
+	}
+	form.submit('_fom', 1);
 }
-else {
-fom._service.value = 'splashd-restart';
-}
-form.submit('_fom', 1);
-}
+
 function init()
 {
 }
 </script>
 </head>
+
 <body onLoad="init()">
 <table id='container' cellspacing=0>
 <tr><td colspan=2 id='header'>
-<div class='title'>Tomato</div>
+	<div class='title'>Tomato</div>
 	<div class='version'>Version <% version(); %></div>
 </td></tr>
 <tr id='body'><td id='navi'><script type='text/javascript'>navi()</script></td>
@@ -128,11 +143,11 @@ function init()
 createFieldTable('', [
 	{ title: '启用功能', name: 'f_NC_enable', type: 'checkbox', value: nvram.NC_enable == '1' },
 	{ title: '接口', multi: [
-{ name: 'NC_BridgeLAN', type: 'select', options: [
-['br0','LAN (br0)*'],
-['br1','LAN1 (br1)'],
-['br2','LAN2 (br2)'],
-['br3','LAN3 (br3)']
+		{ name: 'NC_BridgeLAN', type: 'select', options: [
+			['br0','LAN (br0)*'],
+			['br1','LAN1 (br1)'],
+			['br2','LAN2 (br2)'],
+			['br3','LAN3 (br3)']
 			], value: nvram.NC_BridgeLAN, suffix: ' <small>* 默认</small> ' } ] },
 	{ title: '网关名称', name: 'NC_GatewayName', type: 'text', maxlen: 255, size: 34, value: nvram.NC_GatewayName },
 	{ title: '认证网页跳转', name: 'f_NC_ForcedRedirect', type: 'checkbox', value: (nvram.NC_ForcedRedirect == '1') },
@@ -141,7 +156,7 @@ createFieldTable('', [
 	{ title: '登陆超时', name: 'NC_LoginTimeout', type: 'text', maxlen: 8, size: 4, value: nvram.NC_LoginTimeout, suffix: ' <small>秒</small>' },
 	{ title: '空闲超时', name: 'NC_IdleTimeout', type: 'text', maxlen: 8, size: 4, value: nvram.NC_IdleTimeout, suffix: ' <small>秒 (0 - unlimited)</small>' },
 	{ title: '最大丢失 ARP', name: 'NC_MaxMissedARP', type: 'text', maxlen: 10, size: 2, value: nvram.NC_MaxMissedARP },
-null,
+	null,
 	{ title: '日志信息级别', name: 'NC_Verbosity', type: 'text', maxlen: 10, size: 2, value: nvram.NC_Verbosity },
 	{ title: '网关端口', name: 'NC_GatewayPort', type: 'text', maxlen: 10, size: 7, value: fixPort(nvram.NC_GatewayPort, 5280) },
 	{ title: '无需被重定向的端口', name: 'NC_ExcludePorts', type: 'text', maxlen: 255, size: 34, value: nvram.NC_ExcludePorts },
@@ -155,11 +170,11 @@ null,
 <br>
 <div class='section-title'>自定义 Splash 文件路径</div>
 <div class='section' id='upload-section'>
-<form id='upload-form' method='post' action='uploadsplash.cgi?_http_id=<% nv(http_id); %>' encType='multipart/form-data'>
-<input type='file' size='40' id='upload-name' name='upload_name'>
+ <form id='upload-form' method='post' action='uploadsplash.cgi?_http_id=<% nv(http_id); %>' encType='multipart/form-data'>
+ <input type='file' size='40' id='upload-name' name='upload_name'>
  <input type='button' name='f_upload_button' id='upload-button' value='上传' onclick='uploadButton()'>
-<br>
-</form>
+ <br>
+ </form>
 </div>
 <hr>
 <span style='color:blue'>
@@ -188,11 +203,11 @@ null,
 </td></tr>
 <tr><td id='footer' colspan=2>
 <form>
-<span id='footer-msg'></span>
+ <span id='footer-msg'></span>
  <input type='button' value='保存设置' id='save-button' onclick='save()'>
  <input type='button' value='取消设置' id='cancel-button' onclick='javascript:reloadPage();'>
-</form>
-</div>
+ </form>
+ </div>
 </td></tr>
 </table>
 <script type='text/javascript'>verifyFields(null, 1);</script>

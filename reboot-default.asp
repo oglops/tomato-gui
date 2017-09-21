@@ -1,9 +1,10 @@
 <!--
-Tomato GUI
-Copyright (C) 2006-2010 Jonathan Zarate
-http://www.polarcloud.com/tomato/
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2006-2010 Jonathan Zarate
+	http://www.polarcloud.com/tomato/
+
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <html>
 <head>
@@ -14,22 +15,22 @@ No part of this file may be used without permission.
 var n = 90;
 function tick()
 {
-var e = document.getElementById('continue');
-e.value = n--;
-if (n < 0) {
-e.value = 'Continue';
-return;
-}
-if (n == 19) e.disabled = false;
-setTimeout(tick, 1000);
+	var e = document.getElementById('continue');
+	e.value = n--;
+	if (n < 0) {
+		e.value = 'Continue';
+		return;
+	}
+	if (n == 19) e.disabled = false;
+	setTimeout(tick, 1000);
 }
 function go()
 {
-window.location = 'http://192.168.1.1/';
+	window.location = 'http://192.168.1.1/';
 }
 function init()
 {
-tick()
+	tick()
 }
 </script></head>
 <body style='background:#fff' onload='init()'><table style='width:100%;height:100%'>

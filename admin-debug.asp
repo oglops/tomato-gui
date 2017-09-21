@@ -1,10 +1,11 @@
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0//EN'>
 <!--
-Tomato GUI
-Copyright (C) 2006-2010 Jonathan Zarate
-http://www.polarcloud.com/tomato/
-For use with Tomato Firmware only.
-No part of this file may be used without permission.
+	Tomato GUI
+	Copyright (C) 2006-2010 Jonathan Zarate
+	http://www.polarcloud.com/tomato/
+
+	For use with Tomato Firmware only.
+	No part of this file may be used without permission.
 -->
 <html>
 <head>
@@ -20,42 +21,49 @@ No part of this file may be used without permission.
 <script type='text/javascript' src='debug.js'></script>
 
 <script type='text/javascript'>
+
 //	<% nvram("debug_nocommit,debug_cprintf,debug_cprintf_file,console_loglevel,t_cafree,t_hidelr,debug_ddns,debug_norestart"); %>
+
 function nvramCommit()
 {
-fields.disableAll('_fom', 1);
-form.submitHidden('nvcommit.cgi', { '_nextpage': myName() });
+	fields.disableAll('_fom', 1);
+	form.submitHidden('nvcommit.cgi', { '_nextpage': myName() });
 }
+
 function verifyFields(focused, quiet)
 {
-return 1;
+	return 1;
 }
+
 function save()
 {
-var fom = E('_fom');
-fom.debug_nocommit.value = fom.f_debug_nocommit.checked ? 1 : 0;
-fom.debug_cprintf.value = fom.f_debug_cprintf.checked ? 1 : 0;
-fom.debug_cprintf_file.value = fom.f_debug_cprintf_file.checked ? 1 : 0;
-fom.t_cafree.value = fom.f_cafree.checked ? 1 : 0;
-fom.t_hidelr.value = fom.f_hidelr.checked ? 1 : 0;
-fom.debug_ddns.value = fom.f_debug_ddns.checked ? 1 : 0;
-var a = [];
-if (fom.f_nr_crond.checked) a.push('crond');
-if (fom.f_nr_dnsmasq.checked) a.push('dnsmasq');
+	var fom = E('_fom');
+	fom.debug_nocommit.value = fom.f_debug_nocommit.checked ? 1 : 0;
+	fom.debug_cprintf.value = fom.f_debug_cprintf.checked ? 1 : 0;
+	fom.debug_cprintf_file.value = fom.f_debug_cprintf_file.checked ? 1 : 0;
+	fom.t_cafree.value = fom.f_cafree.checked ? 1 : 0;
+	fom.t_hidelr.value = fom.f_hidelr.checked ? 1 : 0;
+	fom.debug_ddns.value = fom.f_debug_ddns.checked ? 1 : 0;
+
+	var a = [];
+	if (fom.f_nr_crond.checked) a.push('crond');
+	if (fom.f_nr_dnsmasq.checked) a.push('dnsmasq');
 /* LINUX26-BEGIN */
-if (fom.f_nr_hotplug2.checked) a.push('hotplug2');
+	if (fom.f_nr_hotplug2.checked) a.push('hotplug2');
 /* LINUX26-END */
-if (fom.f_nr_igmprt.checked) a.push('igmprt');
-fom.debug_norestart.value = a.join(',');
-form.submit(fom, 1);
+	if (fom.f_nr_igmprt.checked) a.push('igmprt');
+	fom.debug_norestart.value = a.join(',');
+
+	form.submit(fom, 1);
 }
 </script>
+
 </head>
 <body>
 <form id='_fom' method='post' action='tomato.cgi'>
 <table id='container' cellspacing=0>
 <tr><td colspan=2 id='header'>
-<div class='title'>Tomato</div>
+	<div class='title'>Tomato</div>
 	<div class='version'>Version <% version(); %></div>
 </td></tr>
 <tr id='body'><td id='navi'><script type='text/javascript'>navi()</script></td>
@@ -65,6 +73,7 @@ form.submit(fom, 1);
 <!-- / / / -->
 
 <input type='hidden' name='_nextpage' value='admin-misc.asp'>
+
 <input type='hidden' name='debug_nocommit'>
 <input type='hidden' name='debug_cprintf'>
 <input type='hidden' name='debug_cprintf_file'>
@@ -87,13 +96,13 @@ createFieldTable('', [
 	{ title: '在路由器连接中<br>不显示 LAN', name: 'f_hidelr', type: 'checkbox', value: nvram.t_hidelr == '1' },
 	{ title: '控制台日志级别', name: 'console_loglevel', type: 'select', options: a, value: fixInt(nvram.console_loglevel, 1, 8, 1) },
 	{ title: '如果以下进程退出<br>不重新启动', multi: [
-{ name: 'f_nr_crond', type: 'checkbox', suffix: ' crond<br>', value: (nvram.debug_norestart.indexOf('crond') != -1) },
-{ name: 'f_nr_dnsmasq', type: 'checkbox', suffix: ' dnsmasq<br>', value: (nvram.debug_norestart.indexOf('dnsmasq') != -1) },
+		{ name: 'f_nr_crond', type: 'checkbox', suffix: ' crond<br>', value: (nvram.debug_norestart.indexOf('crond') != -1) },
+		{ name: 'f_nr_dnsmasq', type: 'checkbox', suffix: ' dnsmasq<br>', value: (nvram.debug_norestart.indexOf('dnsmasq') != -1) },
 /* LINUX26-BEGIN */
-{ name: 'f_nr_hotplug2', type: 'checkbox', suffix: ' hotplug2<br>', value: (nvram.debug_norestart.indexOf('hotplug2') != -1) },
+		{ name: 'f_nr_hotplug2', type: 'checkbox', suffix: ' hotplug2<br>', value: (nvram.debug_norestart.indexOf('hotplug2') != -1) },
 /* LINUX26-END */
-{ name: 'f_nr_igmprt', type: 'checkbox', suffix: ' igmprt<br>', value: (nvram.debug_norestart.indexOf('igmprt') != -1) }
-] }
+		{ name: 'f_nr_igmprt', type: 'checkbox', suffix: ' igmprt<br>', value: (nvram.debug_norestart.indexOf('igmprt') != -1) }
+	] }
 ]);
 </script>
 <br><br>
@@ -112,6 +121,7 @@ createFieldTable('', [
 &raquo; <a href='/logs/syslog.txt?_http_id=<% nv(http_id); %>'>下载日志文件</a><br>
 &raquo; <a href='/nvram/nvram.txt?_http_id=<% nv(http_id); %>'>下载 NVRAM 配置</a><br>
 <br>
+
 <div style='width:80%'>
 <b>警告</b>: NVRAM 镜像文本文件可能包含如下信息:如 无线加密
 密钥,路由器的用户名/密码, ISP 和 DDNS 信息. 请在共享给别人之前
@@ -122,11 +132,12 @@ createFieldTable('', [
 <!-- / / / -->
 
 </td></tr>
+
 <tr><td id='footer' colspan=2>
 <span id='footer-msg'></span>
 	<input type='button' value='保存设置' id='save-button' onclick='save()'>
 	<input type='button' value='取消设置' id='cancel-button' onclick='reloadPage();'>
-</td></tr>
+	</td></tr>
 </table>
 </form>
 </body>
