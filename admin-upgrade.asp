@@ -123,7 +123,7 @@ function upgrade()
 <div id='afu-progress' style='display:none;margin:auto'>
 	<img src='spin.gif' style='vertical-align:baseline'> <span id='afu-time'>0:00</span><br>
 	正在上传和刷新新固件，请稍候...<br>
-	<b>Warning:</b> 不要关闭 Web 浏览器或路由器!<br>
+	<b>警告:</b> 不要关闭 Web 浏览器或路由器!<br>
 </div>
 
 <!-- / / / -->
