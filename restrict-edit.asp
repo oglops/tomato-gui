@@ -67,7 +67,7 @@ textarea {
 // {enable}|{begin_mins}|{end_mins}|{dow}|{comp[<comp]}|{rules<rules[...]>}|{http[ ...]}|{http_file}|{desc}
 //	<% rrule(); %>
 if ((rule = rrule.match(/^(\d+)\|(-?\d+)\|(-?\d+)\|(\d+)\|(.*?)\|(.*?)\|([^|]*?)\|(\d+)\|(.*)$/m)) == null) {
-	rule = ['', 1, 1380, 240, 31, '', '', '', 0, '新策略 ' + (rruleN + 1)];
+	rule = ['', 1, 1380, 240, 31, '', '', '', 0, 'New Rule ' + (rruleN + 1)];
 }
 rule[2] *= 1;
 rule[3] *= 1;
@@ -92,7 +92,7 @@ var ipp2p = [
 /* LINUX26-END */
 	];
 
-var dowNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+var dowNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 //
 
